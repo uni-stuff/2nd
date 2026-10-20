@@ -33,9 +33,9 @@ h1{font-size:25px;font-weight:700;letter-spacing:-.02em;line-height:1.2}
 .row:hover .nm{color:var(--acc)}
 .ico{flex:none;width:19px;height:19px;color:var(--mute)}
 .row:hover .ico{color:var(--acc)}
-.txt{min-width:0;flex:1}
-.nm{font-weight:600;font-size:14.5px;letter-spacing:-.01em}
-.meta{font-size:11.5px;color:var(--mute);margin-top:2px}
+.txt{display:block;min-width:0;flex:1}
+.nm{display:block;font-weight:600;font-size:14.5px;letter-spacing:-.01em}
+.meta{display:block;font-size:11.5px;color:var(--mute);margin-top:2px}
 .arw{flex:none;color:var(--line);font-size:14px}
 .row:hover .arw{color:var(--acc)}
 

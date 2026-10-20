@@ -32,13 +32,13 @@ STRIP_LEGACY = [
 
 HEAD = """<!-- uni:head -->
 <style>
-/* 브레드크럼 */
+/* Breadcrumb */
 .uni-bc{font-size:.78rem;color:var(--mute);margin:0 0 12px;display:flex;flex-wrap:wrap;gap:5px;align-items:center;font-weight:700}
 .uni-bc a{color:var(--mute);text-decoration:none;border-bottom:1px solid transparent}
 .uni-bc a:hover{color:var(--acc);border-bottom-color:var(--acc)}
 .uni-bc .s{opacity:.4}
 
-/* 검색바 */
+/* Search bar */
 .uni-search{position:sticky;top:0;z-index:40;background:var(--bg);
   padding:8px 0 10px;margin:0 0 14px;border-bottom:1px solid var(--line);
   display:flex;align-items:center;gap:8px}
@@ -62,7 +62,7 @@ HEAD = """<!-- uni:head -->
 mark.uni-hit{background:var(--hl);color:inherit;border-radius:2px;padding:0 1px;scroll-margin-top:92px}
 mark.uni-hit.on{background:var(--acc);color:var(--bg)}
 
-/* 목차 — 좁은 화면에서는 오른쪽 슬라이드 패널 */
+/* Contents — slide-in panel on narrow screens */
 .uni-toc{display:none;position:fixed;top:0;right:0;bottom:0;width:min(300px,82vw);z-index:60;
   background:var(--card);border-left:1px solid var(--line);box-shadow:-10px 0 30px rgba(0,0,0,.22);
   overflow-y:auto;-webkit-overflow-scrolling:touch;
@@ -80,7 +80,7 @@ mark.uni-hit.on{background:var(--acc);color:var(--bg)}
 .uni-scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:55}
 .uni-scrim.on{display:block}
 
-/* 돌아가기 / 고정 버튼 */
+/* Back links and floating buttons */
 .uni-back{margin:28px 0 0;padding-top:16px;border-top:1px solid var(--line);font-size:.86rem;font-weight:700}
 .uni-back a{color:var(--mute);text-decoration:none}
 .uni-back a:hover{color:var(--acc)}
@@ -92,7 +92,7 @@ mark.uni-hit.on{background:var(--acc);color:var(--bg)}
   box-shadow:0 2px 10px rgba(0,0,0,.12)}
 .uni-fabs a:hover,.uni-fabs button:hover{color:var(--acc);border-color:var(--acc)}
 
-/* 넓은 화면 — 목차를 본문 왼쪽에 상시 고정 */
+/* Wide screens: pin the contents to the left of the body */
 @media (min-width:1100px){
   .uni-toc{display:block;position:fixed;left:calc(50% - 530px);top:0;right:auto;bottom:auto;
     width:235px;height:100vh;background:transparent;border:0;box-shadow:none;padding:28px 8px 40px}
@@ -105,40 +105,40 @@ mark.uni-hit.on{background:var(--acc);color:var(--bg)}
 
 TOP = """<!-- uni:top -->
 <nav class="uni-bc">
-<a href="../../">홈</a><span class="s">/</span><a href="../">Engineering in Biology</a><span class="s">/</span><a href="./">Cell Adhesion</a>
+<a href="../../">Home</a><span class="s">/</span><a href="../">Engineering in Biology</a><span class="s">/</span><a href="./">Cell Adhesion</a>
 </nav>
 <div class="uni-search">
   <label class="box">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-    <input type="search" placeholder="노트 안에서 검색 (접힌 내용까지)" autocomplete="off" spellcheck="false" enterkeyhint="search">
+    <input type="search" placeholder="Search this note, collapsed sections included" autocomplete="off" spellcheck="false" enterkeyhint="search">
     <span class="uni-count"></span>
   </label>
   <span class="btns">
-    <button type="button" data-act="prev" title="이전 (Shift+Enter)" aria-label="이전 결과">&#8593;</button>
-    <button type="button" data-act="next" title="다음 (Enter)" aria-label="다음 결과">&#8595;</button>
+    <button type="button" data-act="prev" title="Previous (Shift+Enter)" aria-label="Previous match">&#8593;</button>
+    <button type="button" data-act="next" title="Next (Enter)" aria-label="Next match">&#8595;</button>
   </span>
 </div>
 <!-- /uni:top -->
 """
 
 BOTTOM = """<!-- uni:bottom -->
-<p class="uni-back"><a href="./">← Cell Adhesion 목록으로</a></p>
+<p class="uni-back"><a href="./">← Back to Cell Adhesion</a></p>
 <!-- /uni:bottom -->
 """
 
 FAB = """<!-- uni:fab -->
 <div class="uni-scrim"></div>
-<aside class="uni-toc" aria-label="목차">
-  <div class="hd"><b>목차</b><button type="button" class="x" aria-label="목차 닫기">&#10005;</button></div>
+<aside class="uni-toc" aria-label="Contents">
+  <div class="hd"><b>Contents</b><button type="button" class="x" aria-label="Close contents">&#10005;</button></div>
   <div class="uni-toc-list"></div>
 </aside>
 <div class="uni-fabs">
-  <button type="button" class="uni-toc-btn" aria-label="목차 열기">&#9776; 목차</button>
-  <a href="./" aria-label="Cell Adhesion 목록으로 돌아가기">← 목록</a>
+  <button type="button" class="uni-toc-btn" aria-label="Open contents">&#9776; Contents</button>
+  <a href="./" aria-label="Back to Cell Adhesion">← Notes</a>
 </div>
 <script>
 (function () {
-  var MIN = 2, DEBOUNCE = 120, OFFSET = 72;   // OFFSET: 고정 검색바 높이만큼 띄워서 스크롤
+  var MIN = 2, DEBOUNCE = 120, OFFSET = 72;   // OFFSET: leave room for the sticky search bar
   var root, bar, input, counter, prevBtn, nextBtn;
   var toc, tocList, scrim, tocBtn, links = [], secs = [];
   var hits = [], cur = -1, wasOpen = null, timer = null, ticking = null;
@@ -148,7 +148,7 @@ FAB = """<!-- uni:fab -->
     else document.addEventListener('DOMContentLoaded', fn);
   }
 
-  /* 부드러운 스크롤이 무시되는 환경이 있다. 움직이지 않으면 즉시 이동으로 떨어뜨린다. */
+  /* Some environments ignore smooth scrolling. If nothing moved, jump instantly. */
   function scrollToY(y) {
     if (y < 0) y = 0;
     var start = window.pageYOffset;
@@ -160,7 +160,7 @@ FAB = """<!-- uni:fab -->
     }, 350);
   }
 
-  /* ---------- 목차 ---------- */
+  /* ---------- Contents ---------- */
 
   function buildToc() {
     secs = [].slice.call(root.querySelectorAll('details.sec'));
@@ -201,7 +201,7 @@ FAB = """<!-- uni:fab -->
     for (var j = 0; j < links.length; j++) links[j].classList.toggle('on', links[j] === a);
   }
 
-  /* 지금 보고 있는 섹션을 목차에 표시 */
+  /* Mark whichever section is currently in view */
   function spy() {
     ticking = null;
     if (!secs.length) return;
@@ -213,7 +213,7 @@ FAB = """<!-- uni:fab -->
     setActive(links[idx]);
   }
 
-  /* 타이머로 솎아낸다. requestAnimationFrame 은 탭이 숨겨지면 아예 돌지 않는다. */
+  /* Throttle with a timer: requestAnimationFrame never fires in a hidden tab. */
   function onScroll() {
     if (ticking) return;
     ticking = setTimeout(spy, 80);
@@ -222,7 +222,7 @@ FAB = """<!-- uni:fab -->
   function openPanel() { toc.classList.add('open'); scrim.classList.add('on'); }
   function closePanel() { toc.classList.remove('open'); scrim.classList.remove('on'); }
 
-  /* ---------- 검색 ---------- */
+  /* ---------- Search ---------- */
 
   function allDetails() { return root.querySelectorAll('details'); }
 
@@ -250,7 +250,7 @@ FAB = """<!-- uni:fab -->
     }
   }
 
-  /* <style>, <script>, SVG 안은 건드리지 않는다. SVG에 <mark>를 넣으면 도형이 깨진다. */
+  /* Leave <style>, <script> and SVG alone: a <mark> inside SVG breaks the drawing. */
   function skippable(el) {
     while (el && el !== root) {
       var n = el.nodeName;
@@ -294,14 +294,14 @@ FAB = """<!-- uni:fab -->
 
     if (q.length < MIN) {
       restoreOpen();
-      counter.textContent = q.length ? '2자 이상' : '';
+      counter.textContent = q.length ? 'Type 2+ characters' : '';
       bar.classList.remove('has');
       return;
     }
 
     snapshotOpen();
     var d = allDetails();
-    for (var i = 0; i < d.length; i++) d[i].open = true;   // 접힌 내용도 검색 대상
+    for (var i = 0; i < d.length; i++) d[i].open = true;   // collapsed content is searchable too
 
     var needle = q.toLowerCase();
     var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
@@ -313,7 +313,7 @@ FAB = """<!-- uni:fab -->
       }
     });
     var targets = [], n;
-    while ((n = walker.nextNode())) targets.push(n);   // 먼저 다 모으고 나서 DOM을 바꾼다
+    while ((n = walker.nextNode())) targets.push(n);   // collect every node first, then mutate the DOM
     for (var j = 0; j < targets.length; j++) highlight(targets[j], needle, q.length);
 
     hits = [].slice.call(root.querySelectorAll('mark.uni-hit'));
@@ -323,12 +323,12 @@ FAB = """<!-- uni:fab -->
       prevBtn.disabled = nextBtn.disabled = false;
       go(1);
     } else {
-      counter.textContent = '결과 없음';
+      counter.textContent = 'No matches';
       restoreOpen();
     }
   }
 
-  /* ---------- 시작 ---------- */
+  /* ---------- Boot ---------- */
 
   ready(function () {
     root = document.querySelector('.wrap');

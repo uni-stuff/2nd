@@ -1,0 +1,686 @@
+<title>Cell Adhesion L6-8 Quiz Notes</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800&display=swap">
+<style>
+/* Layout: phone-first single column. One card = one idea. Figure on top, plain sentences, then "More detail" fold with the slide's exact wording, then quiz words. A hot list at the top and a self-test at the bottom. */
+:root{
+  --bg:#f3f5f2; --card:#ffffff; --fg:#1c231f; --mute:#66706a; --line:#dde2dc;
+  --actin:#d14545; --mt:#2f9a52; --if:#2e7ccf; --acc:#b86b1a; --soft:#eaf0ea; --hl:#fff0b8; --star:#fde8c8;
+  --f:"Nunito",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14171a;--card:#1e2327;--fg:#eceee9;--mute:#9ba59e;--line:#333a3e;--actin:#ef7070;--mt:#5fd083;--if:#6fb0ee;--acc:#e5a65a;--soft:#262c30;--hl:#4a3f1c;--star:#4a3418;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14171a;--card:#1e2327;--fg:#eceee9;--mute:#9ba59e;--line:#333a3e;--actin:#ef7070;--mt:#5fd083;--if:#6fb0ee;--acc:#e5a65a;--soft:#262c30;--hl:#4a3f1c;--star:#4a3418;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f);font-size:17px;line-height:1.55;font-weight:500;
+ padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 80px}
+.wrap{max-width:560px;margin:0 auto}
+h1{font-size:1.6rem;font-weight:800;margin:0 0 4px;line-height:1.2}
+.sub{color:var(--mute);font-size:.9rem;margin:0 0 18px}
+details.sec{margin:14px 0}
+details.sec>summary{list-style:none;cursor:pointer;font-weight:800;font-size:1.25rem;padding:14px 16px;background:var(--card);border:1px solid var(--line);border-radius:14px;display:flex;align-items:center;gap:10px}
+summary::-webkit-details-marker{display:none}
+details.sec>summary .n{font-size:.75rem;color:var(--mute);font-weight:700;background:var(--soft);padding:2px 8px;border-radius:999px}
+details.sec>summary::after{content:"+";margin-left:auto;color:var(--mute);font-weight:700}
+details.sec[open]>summary::after{content:"–"}
+details.sec[open]>summary{border-radius:14px 14px 0 0}
+.card{background:var(--card);border:1px solid var(--line);border-top:0;padding:16px}
+.card+.card{border-top:1px dashed var(--line)}
+.card:last-child{border-radius:0 0 14px 14px}
+.card h3{font-size:1.1rem;font-weight:800;margin:0 0 10px}
+.card svg{display:block;width:100%;height:auto;margin:0 auto 12px}
+p{margin:8px 0}
+.say{background:var(--soft);border-radius:10px;padding:10px 12px;margin:10px 0;font-size:1rem}
+.say b{color:var(--acc)}
+.star{background:var(--star);border-radius:10px;padding:10px 12px;margin:10px 0;font-size:1rem}
+.star b{color:var(--acc)}
+.words{margin:12px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.words li{font-size:.85rem;font-weight:700;background:var(--hl);padding:3px 9px;border-radius:999px}
+.cmp{display:grid;grid-template-columns:1fr;gap:8px;margin:10px 0}
+.cmp div{padding:10px 12px;border-radius:10px;background:var(--soft);font-size:.97rem}
+.cmp div b{display:block;margin-bottom:2px}
+.ra{color:var(--actin)}.rm{color:var(--mt)}.ri{color:var(--if)}
+details.more{margin:10px 0 0;border:1px dashed var(--line);border-radius:10px}
+details.more>summary{cursor:pointer;list-style:none;padding:8px 12px;font-weight:700;font-size:.92rem;color:var(--acc)}
+details.more>summary::before{content:"▸ ";}
+details.more[open]>summary::before{content:"▾ ";}
+details.more .in{padding:0 12px 10px;font-size:.95rem}
+details.more .in ul{margin:4px 0;padding-left:18px}
+details.more .in li{margin:4px 0}
+.hot{list-style:none;margin:0;padding:0;counter-reset:h}
+.hot li{counter-increment:h;padding:10px 12px 10px 42px;position:relative;border-bottom:1px dashed var(--line);font-size:.98rem}
+.hot li:last-child{border-bottom:0}
+.hot li::before{content:counter(h);position:absolute;left:10px;top:10px;width:24px;height:24px;border-radius:50%;background:var(--acc);color:#fff;font-weight:800;font-size:.8rem;display:flex;align-items:center;justify-content:center}
+.hot b{color:var(--acc)}
+.q{border:1px solid var(--line);border-radius:10px;margin:8px 0;overflow:hidden}
+.q>summary{list-style:none;cursor:pointer;padding:10px 12px;font-weight:700;font-size:.98rem;background:var(--soft)}
+.q>summary::before{content:"Q. "}
+.q .a{padding:10px 12px;font-size:.95rem}
+.q .a::before{content:"A. ";font-weight:800;color:var(--acc)}
+svg text{font-family:var(--f);fill:var(--fg);font-size:15px;font-weight:700}
+svg .s{font-size:13px;font-weight:500}
+svg .mu{fill:var(--mute)}
+svg .w{fill:#fff}
+</style>
+
+<div class="wrap">
+<h1>Cell Adhesion quiz notes</h1>
+<p class="sub">Lectures 6, 7, 8 · tap a section to open · "More detail" = what the slide actually says</p>
+
+<!-- ===================== HOT LIST ===================== -->
+<details class="sec" open>
+<summary><span class="n">★</span>Most likely to be asked</summary>
+<div class="card">
+<p style="margin-top:0;color:var(--mute);font-size:.9rem">These are the things the slides put in bold, boxed, or repeated. If you learn nothing else, learn these.</p>
+<ol class="hot">
+<li><b>3 filaments table.</b> Actin = G-actin + ATP, 2 strands, polar, flexible. Microtubule = αβ-tubulin + GTP, 13 strands hollow tube, polar, stiffest. Intermediate = fibrous subunit, 8 tetramers rope, <b>no polarity, no nucleotide</b>, strongest.</li>
+<li><b>3 phases of actin polymerisation:</b> nucleation (lag) → elongation (growth) → steady state (equilibrium). C<sub>c</sub> = critical concentration, k<sub>on</sub>·C = k<sub>off</sub>.</li>
+<li><b>C vs C<sub>c</sub>:</b> C &gt; C<sub>c</sub> grows, C = C<sub>c</sub> same length, C &lt; C<sub>c</sub> shrinks.</li>
+<li><b>Plus end (barbed)</b> grows up to 10× faster, hydrolysis slower, lower C<sub>c</sub>. <b>Minus end (pointed)</b> slow, hydrolysis faster. <b>C<sub>c</sub>(minus) &gt; C<sub>c</sub>(plus)</b> (written in red on the slide). Plus ends at the leading edge push the membrane forward.</li>
+<li><b>T form vs D form:</b> ATP-actin grows, ADP-actin falls off. Hydrolysis is slow in free actin, fast once in the filament. Most free subunits are T form (ATP ≫ ADP in the cell).</li>
+<li><b>Requirements for actin polymerisation:</b> monomer availability, filament nucleation, fibre elongation.</li>
+<li><b>Who does what:</b> thymosin blocks, profilin speeds, Arp2/3 = branches, formin = parallel, tropomyosin = side stabiliser, CapZ = + cap, tropomodulin = − cap, gelsolin (needs Ca²⁺) and cofilin (ADP-actin) = cut.</li>
+<li><b>Microtubule polarity:</b> α-tubulin exposed at the − end, β-tubulin at the + end. Nucleated by <b>γ-tubulin ring complex</b> at the <b>MTOC / centrosome</b>. Subunits added and lost <b>only at the ends</b>.</li>
+<li><b>Drugs:</b> Taxol stabilises; colchicine and nocodazole block tubulin. Both kill dividing cells because <b>microtubule dynamics is crucial for the spindle</b>.</li>
+<li><b>Motors sorted by:</b> filament, direction, cargo. Myosin on actin → + end. Kinesin on MT → + end (out). Dynein on MT → − end (in). Main job: <b>transport and positioning of organelles</b>.</li>
+<li><b>Myosin cycle:</b> attached → released (<b>ATP binds</b>) → cocked (<b>ATP hydrolysis</b>) → force-generating (Pi release → <b>power stroke</b>).</li>
+<li><b>Muscle:</b> myosin II generates force, heads walk toward actin <b>+ end</b>, thick filament is <b>bipolar</b>. Actin + ends anchored at the <b>Z disc</b> by capping proteins. <b>Titin</b> is elastic. Ca²⁺ rise is <b>transient</b>. Two big ATP users: sliding and Ca²⁺ pumping.</li>
+<li><b>Actin functions (boxed on slide):</b> cell shape and strength · <b>locomotion: lamellipodia and filopodia</b> · pinching the cell in two.</li>
+<li><b>Crawling = protrusion, attachment, traction.</b> Contraction at the back must be coupled with de-adhesion at the rear. <b>Locomotion requires an initial polarization.</b></li>
+<li><b>Rho family:</b> Cdc42 → filopodia, Rac → lamellipodia (front), Rho → stress fibres and focal adhesions (back). External signals: chemotaxis (diffusible gradient) and non-diffusible cues on ECM or cells.</li>
+<li><b>Summary slide:</b> to crawl, a cell must (1) make and keep polarity (2) protrude at the leading edge with new actin (3) adhere the new part to the substratum (4) use motor forces to bring the body forward.</li>
+</ol>
+</div>
+</details>
+
+<!-- ===================== L6 ===================== -->
+<details class="sec">
+<summary><span class="n">L6</span>The big picture</summary>
+
+<div class="card">
+<h3>What is inside a cell</h3>
+<div class="cmp">
+<div><b>Cell membrane</b> wall between inside and outside.</div>
+<div><b>Cytoplasm</b> jelly that holds the organelles.</div>
+<div><b>DNA</b> the instructions. Kept in the <b>nucleus</b> (control centre).</div>
+<div><b>Endoplasmic reticulum</b> passageway that moves materials.</div>
+<div><b>Golgi</b> receives proteins in little bags (vesicles) and sorts them.</div>
+<div><b>Mitochondrion</b> powerhouse, makes ATP.</div>
+<div><b>Lysosome</b> garbage collector full of enzymes.</div>
+<div><b>Cytoskeleton</b> keeps the cell's shape. (This is what L7 and L8 are about.)</div>
+</div>
+</div>
+
+<div class="card">
+<h3>Cell → tissue → organ → system</h3>
+<svg viewBox="0 0 360 90" role="img" aria-label="hierarchy">
+ <g font-size="14">
+  <rect x="4" y="22" width="78" height="44" rx="10" fill="var(--soft)"/><text x="43" y="50" text-anchor="middle">Cell</text>
+  <rect x="96" y="22" width="78" height="44" rx="10" fill="var(--soft)"/><text x="135" y="50" text-anchor="middle">Tissue</text>
+  <rect x="188" y="22" width="78" height="44" rx="10" fill="var(--soft)"/><text x="227" y="50" text-anchor="middle">Organ</text>
+  <rect x="280" y="22" width="78" height="44" rx="10" fill="var(--soft)"/><text x="319" y="50" text-anchor="middle">System</text>
+ </g>
+ <g stroke="var(--mute)" stroke-width="2"><line x1="84" y1="44" x2="94" y2="44"/><line x1="176" y1="44" x2="186" y2="44"/><line x1="268" y1="44" x2="278" y2="44"/></g>
+</svg>
+<p>Cells stack into tissues, tissues into organs, organs into systems. There are 4 tissue types: <b>epithelial</b> (covers surfaces), <b>muscle</b> (fibres that contract), <b>nervous</b> (cells with projections that send electrical signals), <b>connective</b> (holds stuff together).</p>
+<div class="say"><b>Connective tissue has 3 kinds:</b> fibrous (loose tissue, padding under skin) · skeletal (bone, cartilage: cells in a hard matrix) · fluid (blood: cells in a liquid matrix).</div>
+<details class="more"><summary>More detail (slide wording)</summary><div class="in"><ul>
+<li>Tissues are "multiple cell types arising from progenitor or stem cells".</li>
+<li>"Not all tissues are renewal tissues, but most display a small degree of renewal."</li>
+<li>"Each tissue has a specific cellular composition and microarchitecture."</li>
+<li>Systems named: skeletal (structure, protection), muscular (support, movement), digestive, respiratory, nervous, circulatory (O₂, nutrients, waste), lymphatic (defence), integumentary (skin, nails, hair), endocrine (hormones), urinary (blood filtration), reproductive.</li>
+</ul></div></details>
+</div>
+
+<div class="card">
+<h3>ECM = the scaffolding outside cells</h3>
+<svg viewBox="0 0 360 150" role="img" aria-label="ECM">
+ <g stroke="var(--acc)" stroke-width="3" fill="none" opacity=".7">
+  <path d="M0 30 q90 40 180 0 t180 0"/><path d="M0 80 q90 -40 180 0 t180 0"/><path d="M0 120 q90 30 180 0 t180 0"/><path d="M60 0 q20 70 0 150"/><path d="M200 0 q-20 70 0 150"/><path d="M300 0 q10 70 0 150"/>
+ </g>
+ <ellipse cx="130" cy="75" rx="42" ry="26" fill="var(--soft)" stroke="var(--fg)" stroke-width="2"/>
+ <text x="130" y="80" text-anchor="middle" class="s">cell</text>
+ <text x="200" y="70" font-size="14">ECM fibres</text>
+ <text x="200" y="88" class="s mu">collagen, elastic</text>
+</svg>
+<p>ECM (extracellular matrix) is a net of protein fibres outside the cells: collagen fibres, elastic fibres, reticular fibres, plus "ground substance" filling the gaps. <b>Fibroblasts</b> are the cells that make it.</p>
+<div class="star"><b>Two main functions of ECM:</b> ① provide mechanical support to the cells ② regulate cell behaviour.</div>
+<div class="say"><b>Two glue proteins (transmembrane adhesion proteins):</b><br><span class="ri">Cadherin</span> = cell to cell.<br><span class="ra">Integrin</span> = cell to ECM. Outside the cell it holds ECM protein; inside it holds actin through <b>talin, vinculin, kindlin</b>. Integrin has an α subunit and a β subunit.</div>
+<ul class="words"><li>ECM</li><li>fibroblast</li><li>ground substance</li><li>cadherin = cell-cell</li><li>integrin = cell-ECM</li><li>talin · vinculin · kindlin</li></ul>
+</div>
+
+<div class="card">
+<h3>Why a biomedical engineer cares</h3>
+<p>When you put cells on a material, the cell never touches the bare material. <b>ECM proteins land on the material first</b>, and the cell grabs those with integrins (making focal adhesions with talin, vinculin, FAK, Src inside).</p>
+<div class="say"><b>Chain to remember:</b> substrate (chemistry, mechanics, topography) → ECM proteins (how strongly they stick, how many, what shape) → integrins / focal adhesion → cell response (adhesion, proliferation, differentiation, phenotype expression).</div>
+<details class="more"><summary>More detail</summary><div class="in"><ul>
+<li>Slide title: "ECM proteins mediate cell-material interactions."</li>
+<li>Lab 1 is about exactly this: Part 1 protein adsorption on a sample, Part 2 hydrogel preparation (macro / micro / nanogels), Part 3 cell-material interaction under the microscope.</li>
+<li>Cytoskeleton matters for two big jobs shown on the overview slide: <b>cell migration</b> and <b>cell division</b>.</li>
+</ul></div></details>
+</div>
+</details>
+
+<!-- ===================== 3 filaments ===================== -->
+<details class="sec">
+<summary><span class="n">L7</span>The 3 filaments</summary>
+
+<div class="card">
+<h3>Why cells need a skeleton</h3>
+<p>A cell has to be <b>correctly shaped</b>, <b>physically robust</b>, <b>properly structured inside</b>, and able to <b>change shape to grow, divide and move</b>. All of that comes from a system of protein ropes called the cytoskeleton.</p>
+<div class="star"><b>3 main filament systems</b> with "different mechanical properties, dynamics and biological roles": actin filaments, microtubules, intermediate filaments.</div>
+</div>
+
+<div class="card">
+<h3>Three kinds of "rope" inside a cell</h3>
+<svg viewBox="0 0 360 270" role="img" aria-label="three filaments">
+ <text x="10" y="22" fill="var(--actin)">Actin</text>
+ <g fill="var(--actin)">
+  <circle cx="190" cy="22" r="7"/><circle cx="204" cy="14" r="7"/><circle cx="218" cy="22" r="7"/><circle cx="232" cy="14" r="7"/><circle cx="246" cy="22" r="7"/><circle cx="260" cy="14" r="7"/><circle cx="274" cy="22" r="7"/><circle cx="288" cy="14" r="7"/><circle cx="302" cy="22" r="7"/><circle cx="316" cy="14" r="7"/><circle cx="330" cy="22" r="7"/><circle cx="344" cy="14" r="7"/>
+ </g>
+ <text x="10" y="48" class="s">2 strands twisted together</text>
+ <text x="10" y="68" class="s mu">thin · bendy · has a + and − end</text>
+
+ <text x="10" y="112" fill="var(--mt)">Microtubule</text>
+ <rect x="200" y="94" width="140" height="30" rx="4" fill="var(--soft)" stroke="var(--mt)" stroke-width="2"/>
+ <g stroke="var(--mt)" stroke-width="1"><line x1="200" y1="102" x2="340" y2="102"/><line x1="200" y1="109" x2="340" y2="109"/><line x1="200" y1="116" x2="340" y2="116"/></g>
+ <ellipse cx="340" cy="109" rx="6" ry="15" fill="var(--card)" stroke="var(--mt)" stroke-width="2"/>
+ <text x="10" y="138" class="s">hollow tube, 13 strands</text>
+ <text x="10" y="158" class="s mu">thick · stiffest · has a + and − end</text>
+
+ <text x="10" y="202" fill="var(--if)">Intermediate</text>
+ <g stroke="var(--if)" stroke-width="3" fill="none">
+  <path d="M200 192 q17 -6 35 0 t35 0 t35 0 t35 0"/><path d="M200 200 q17 6 35 0 t35 0 t35 0 t35 0"/><path d="M200 208 q17 -6 35 0 t35 0 t35 0 t35 0"/>
+ </g>
+ <text x="10" y="228" class="s">twisted rope, 8 strands</text>
+ <text x="10" y="248" class="s mu">toughest · NO + or − end</text>
+ <text x="10" y="266" class="s mu">no polarity, no ATP or GTP</text>
+</svg>
+<div class="cmp">
+<div><b class="ra">Actin (microfilament)</b> Round <b>G-actin</b> beads, each holding one <b>ATP</b>. Beads join head-to-tail, so the filament has a direction (polar). Two strands wind round each other (right-handed helix). Flexible. Most of it sits at the <b>cell edge</b> (periphery). Jobs: cell shape, crawling, pinching the cell in two.</div>
+<div><b class="rm">Microtubule</b> Pairs of <b>α-tubulin + β-tubulin</b> (a heterodimer), each pair holding one <b>GTP</b>. Pairs stack head-to-tail into a strand (protofilament), 13 strands make a hollow tube. Stiffest and straightest. Grow out from the centre to the edge (cytoplasmic array). Jobs: roads for cargo, parking organelles, spindle in division.</div>
+<div><b class="ri">Intermediate filament</b> Long stringy subunits with a central α-helix. No nucleotide, no direction. Job: pure strength, cage around the DNA.</div>
+</div>
+<div class="star"><b>Why all three are stable AND dynamic:</b> each is built of many small subunits held by many weak (non-covalent) bonds in several strands. Breaking the middle means breaking many bonds at once (thermally stable, mechanically strong). Taking one subunit off the end breaks only a few bonds (dynamic). So subunits come and go <b>only at the ends</b>.</div>
+<details class="more"><summary>More detail (slide wording)</summary><div class="in"><ul>
+<li>Actin and tubulin both "catalyse the hydrolysis" of their nucleotide. The energy "enables the filaments to remodel rapidly".</li>
+<li>Microtubules are "more complex structures than the actin filaments".</li>
+<li>Along a microtubule "each subunit is bound extremely tightly to its neighbours" (longitudinal), and neighbouring protofilaments form "lateral contacts".</li>
+<li>Intermediate filament subunits "are small and can diffuse rapidly in the cytosol (but not the filaments)".</li>
+<li>Cytoskeletal structures "can change or persist according to need, lasting from less than a minute to the cell's lifetime". Examples: rearrangement during mitosis; a neutrophil reshaping itself within minutes when it detects a bacterium.</li>
+</ul></div></details>
+<ul class="words"><li>G-actin · ATP</li><li>αβ-tubulin heterodimer · GTP</li><li>polarity</li><li>13 protofilaments</li><li>8 tetramers</li><li>non-covalent bonds</li></ul>
+</div>
+</details>
+
+<!-- ===================== actin ===================== -->
+<details class="sec">
+<summary><span class="n">L7</span>How actin grows</summary>
+
+<div class="card">
+<h3>3 phases: slow start, fast growth, then flat</h3>
+<svg viewBox="0 0 360 190" role="img" aria-label="growth curve">
+ <rect x="40" y="20" width="70" height="130" fill="var(--soft)"/>
+ <rect x="220" y="20" width="130" height="130" fill="var(--hl)" opacity=".6"/>
+ <line x1="40" y1="150" x2="350" y2="150" stroke="var(--fg)" stroke-width="2"/>
+ <line x1="40" y1="150" x2="40" y2="20" stroke="var(--fg)" stroke-width="2"/>
+ <path d="M40 148 C100 146 110 130 150 95 S200 40 230 36 S330 32 350 32" fill="none" stroke="var(--actin)" stroke-width="4"/>
+ <line x1="40" y1="32" x2="350" y2="32" stroke="var(--mute)" stroke-dasharray="4 4"/>
+ <text x="75" y="172" text-anchor="middle" class="s">1 nucleation</text>
+ <text x="165" y="172" text-anchor="middle" class="s">2 elongation</text>
+ <text x="285" y="172" text-anchor="middle" class="s">3 steady state</text>
+ <text x="36" y="14" text-anchor="start" class="s mu">filament amount ↑ · time →</text>
+</svg>
+<p><b>1 Nucleation (lag phase):</b> a few beads find each other and make a seed (the "nucleus"). The seed is held by many bead-to-bead contacts. This step is slow.<br><b>2 Elongation (growth phase):</b> beads snap onto the ends quickly.<br><b>3 Steady state (equilibrium phase):</b> beads joining = beads leaving. Length stays the same.</p>
+<div class="star"><b>C<sub>c</sub> (critical concentration)</b> = the amount of free actin at which joining and leaving are equal. The slide formula: <b>k<sub>on</sub> · C = k<sub>off</sub></b>. So C<sub>c</sub> = k<sub>off</sub> / k<sub>on</sub>. C is the concentration of free actin subunits.<br>C &gt; C<sub>c</sub> → beads add at both ends before hydrolysis, elongation faster than dissociation → grows.<br>C = C<sub>c</sub> → addition rate equals loss rate → constant length.<br>C &lt; C<sub>c</sub> → hydrolysis at both ends, elongation slower than dissociation → shrinks.</div>
+<div class="say"><b>Why the cell cares:</b> "Importance of the regulation of actin filament formation: control cell shape and movement."</div>
+<ul class="words"><li>nucleation / lag</li><li>elongation / growth</li><li>steady state / equilibrium</li><li>C<sub>c</sub></li><li>k<sub>on</sub> C = k<sub>off</sub></li></ul>
+</div>
+
+<div class="card">
+<h3>Plus end grows, minus end shrinks</h3>
+<svg viewBox="0 0 360 170" role="img" aria-label="treadmilling">
+ <defs>
+  <marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8z" fill="var(--actin)"/></marker>
+  <marker id="am" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8z" fill="var(--mute)"/></marker>
+  <marker id="ag" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8z" fill="var(--mt)"/></marker>
+  <marker id="af" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8z" fill="var(--fg)"/></marker>
+ </defs>
+ <text x="60" y="24" text-anchor="middle">− end</text>
+ <text x="300" y="24" text-anchor="middle">+ end</text>
+ <rect x="60" y="50" width="120" height="34" fill="var(--mute)" opacity=".55"/>
+ <rect x="180" y="50" width="120" height="34" fill="var(--actin)"/>
+ <text x="120" y="73" text-anchor="middle" class="w s">old · ADP</text>
+ <text x="240" y="73" text-anchor="middle" class="w s">new · ATP</text>
+ <path d="M300 67 l36 0" stroke="var(--actin)" stroke-width="3" marker-end="url(#ar)"/>
+ <path d="M60 67 l-36 0" stroke="var(--mute)" stroke-width="3" marker-end="url(#am)"/>
+ <text x="60" y="112" text-anchor="middle" class="s">slow to grow</text>
+ <text x="60" y="130" text-anchor="middle" class="s">beads fall off</text>
+ <text x="300" y="112" text-anchor="middle" class="s">grows 10× faster</text>
+ <text x="300" y="130" text-anchor="middle" class="s">beads join</text>
+ <text x="180" y="160" text-anchor="middle" class="s">= treadmilling (the filament "walks")</text>
+</svg>
+<p>A free actin bead carries a tightly bound <b>ATP</b>. Once it is in the filament, the ATP gets split into <b>ADP</b>. Beads with ATP are called the <b>T form</b> and like to stay. Beads with ADP are the <b>D form</b> and like to leave.</p>
+<p>The <b>plus end (barbed end)</b> adds beads up to <b>10× faster</b> because the bead changes shape when it joins the polymer. Hydrolysis is slower there. The <b>minus end (pointed end)</b> grows slowly and hydrolyses faster. So the minus end needs more free actin just to hold still:</p>
+<div class="star"><b>C<sub>c</sub>(minus end) &gt; C<sub>c</sub>(plus end)</b> (this line is in red on the slide). Elongation faster and hydrolysis slower at the plus end. Elongation slower and hydrolysis faster at the minus end.<br><b>Result:</b> if a motile cell points its fast-growing plus ends toward the leading edge, it can push its plasma membrane forward.</div>
+<details class="more"><summary>More detail (slide wording)</summary><div class="in"><ul>
+<li>"Actin catalyse ATP hydrolysis: very slowly in free actin subunits, accelerated when incorporated into filaments."</li>
+<li>"Most soluble subunits are in the T form; free concentration of ATP ≫ ADP."</li>
+<li><b>Filament half-life:</b> how long one actin bead spends in a filament as it treadmills. Can be 30 min or 30 s.</li>
+<li><b>Persistence length:</b> the minimum length (a few tens of µm) at which random thermal wobbling is likely to bend the filament.</li>
+<li>Accessory proteins cross-link and bundle filaments into large structures that are "much more rigid than individual actin filament".</li>
+</ul></div></details>
+<ul class="words"><li>barbed (+) / pointed (−)</li><li>T form / D form</li><li>treadmilling</li><li>half-life 30 s to 30 min</li><li>persistence length</li></ul>
+</div>
+
+<div class="card">
+<h3>Helper proteins: who does what</h3>
+<svg viewBox="0 0 360 290" role="img" aria-label="actin helpers">
+ <g class="s">
+  <text x="10" y="24">Thymosin</text><text x="10" y="42" class="mu">hides beads</text>
+  <text x="350" y="24" text-anchor="end">Profilin</text><text x="350" y="42" text-anchor="end" class="mu">pushes beads on</text>
+ </g>
+ <g fill="var(--actin)"><circle cx="160" cy="34" r="7"/><circle cx="180" cy="26" r="7"/><circle cx="200" cy="36" r="7"/></g>
+ <text x="180" y="62" text-anchor="middle" class="s mu">free beads</text>
+ <path d="M180 72 l0 30" stroke="var(--fg)" stroke-width="2" marker-end="url(#af)"/>
+ <text x="90" y="124" text-anchor="middle" class="s">−</text>
+ <rect x="100" y="110" width="160" height="26" rx="13" fill="var(--actin)"/>
+ <text x="180" y="128" text-anchor="middle" class="w s">actin filament</text>
+ <text x="270" y="124" text-anchor="middle" class="s">+</text>
+ <g class="s">
+  <text x="10" y="170">Tropomodulin</text><text x="10" y="188" class="mu">caps − end</text>
+  <text x="350" y="170" text-anchor="end">CapZ</text><text x="350" y="188" text-anchor="end" class="mu">caps + end</text>
+  <text x="180" y="226" text-anchor="middle">Tropomyosin</text><text x="180" y="244" text-anchor="middle" class="mu">lies along the side, protects</text>
+  <text x="180" y="272" text-anchor="middle">Cofilin · Gelsolin</text><text x="180" y="288" text-anchor="middle" class="mu">cut it into pieces</text>
+ </g>
+</svg>
+<div class="star"><b>Requirements for actin polymerisation (3):</b> actin monomer availability · filament nucleation · fibre elongation. Which filaments form where depends on the balance between <b>stabilising</b> and <b>destabilising (sequestering)</b> accessory proteins.</div>
+<div class="cmp">
+<div><b>Thymosin (slows)</b> grabs free beads so they can't join. Makes polymerisation "much less favourable".</div>
+<div><b>Profilin (speeds)</b> binds the bead on the face <b>opposite the ATP site</b>, leaving free the face that binds the + end. After the bead binds, it changes shape and profilin lets go. <b>Profilin and thymosin compete</b> for the same beads.</div>
+<div><b>Arp2/3 complex (nucleator)</b> brings beads together to make a seed on the <b>side</b> of an existing filament. Blocks the − end, lets the + end grow → <b>branches</b> (a web, used in lamellipodia).</div>
+<div><b>Formin (nucleator)</b> a dimer; each half holds one bead, so it captures 2 monomers to start a filament, then stays on the growing + end → <b>straight parallel filaments</b> (filopodia, stress fibres).</div>
+<div><b>Tropomyosin (side binder)</b> long protein lying along the filament, covers 6-7 beads. Stabilises but still allows growth.</div>
+<div><b>CapZ / capping protein (+ end)</b> reduces both growth and depolymerisation at the + end.</div>
+<div><b>Tropomodulin (− end)</b> binds the − end of actin already stabilised by tropomyosin (or pure actin). Strongly reduces both elongation and depolymerisation.</div>
+<div><b>Gelsolin (severs)</b> breaks a filament into many short pieces and caps the + end. Switched on by <b>high cytosolic Ca²⁺</b>.</div>
+<div><b>Cofilin (severs)</b> prefers <b>ADP-actin</b>, so it takes apart the <b>older</b> filaments.</div>
+<div><b>Bundle / cross-link / attach:</b> fimbrin and α-actinin tie filaments in parallel bundles. Filamin makes a gel network. Spectrin and ERM tie actin to the plasma membrane.</div>
+</div>
+<div class="say"><b>Two rules the slide spells out:</b> nucleation "occurs primarily at the cell membrane". And "an actin filament that stops growing and is not stabilised in the cell will depolymerise rapidly".</div>
+</div>
+</details>
+
+<!-- ===================== MT ===================== -->
+<details class="sec">
+<summary><span class="n">L7</span>Microtubules</summary>
+
+<div class="card">
+<h3>They all start at the centrosome</h3>
+<svg viewBox="0 0 360 200" role="img" aria-label="centrosome">
+ <circle cx="180" cy="100" r="36" fill="var(--soft)" stroke="var(--mt)" stroke-width="2.5"/>
+ <rect x="166" y="86" width="12" height="28" fill="var(--mt)" rx="3"/><rect x="180" y="98" width="28" height="12" fill="var(--mt)" rx="3"/>
+ <g stroke="var(--mt)" stroke-width="3">
+  <line x1="212" y1="80" x2="300" y2="34"/><line x1="216" y1="100" x2="320" y2="100"/><line x1="212" y1="120" x2="300" y2="166"/>
+  <line x1="148" y1="80" x2="60" y2="34"/><line x1="144" y1="100" x2="40" y2="100"/><line x1="148" y1="120" x2="60" y2="166"/>
+ </g>
+ <g fill="var(--mt)"><text x="306" y="30">+</text><text x="326" y="105">+</text><text x="306" y="176">+</text><text x="44" y="30">+</text><text x="24" y="105">+</text><text x="44" y="176">+</text></g>
+ <text x="180" y="160" text-anchor="middle" class="s">centrosome (MTOC)</text>
+ <text x="180" y="190" text-anchor="middle" class="s mu">− ends stuck in the middle, + ends point out</text>
+</svg>
+<p>The <b>centrosome</b> = <b>MTOC</b> (microtubule-organising centre). It is a blob of fibrous proteins organised by a pair of <b>centrioles</b> (short cylinders of modified microtubules), and it is rich in <b>γ-tubulin</b>. It sits free in the cytoplasm, next to the nucleus.</p>
+<div class="star"><b>γ-tubulin ring complex (γ-TuRC):</b> two accessory proteins bind γ-tubulin and make a spiral ring. That ring is the <b>template that makes a microtubule with exactly 13 protofilaments</b>. It stays stuck on the − end.<br><b>Polarity:</b> α-tubulin is exposed at the − end, β-tubulin at the + end. All subunits in one protofilament point the same way.</div>
+<p>Centrioles recruit the γ-rings via other proteins, but they are "<b>not absolutely required</b> for microtubule nucleation". Microtubules "continuously grow and shrink along the entire volume of the cell".</p>
+<div class="say"><b>What this gives the cell:</b> microtubules can find the <b>centre of the cell</b> and position organelles; and they play a big role in <b>cell division</b> (next lectures).</div>
+<ul class="words"><li>centrosome = MTOC</li><li>centrioles</li><li>γ-TuRC</li><li>13 protofilaments</li><li>α at − end · β at + end</li></ul>
+</div>
+
+<div class="card">
+<h3>Why a tube is stable AND dynamic</h3>
+<svg viewBox="0 0 360 150" role="img" aria-label="single vs many protofilaments">
+ <g fill="var(--mt)"><circle cx="30" cy="30" r="7"/><circle cx="46" cy="30" r="7"/><circle cx="62" cy="30" r="7"/><circle cx="78" cy="30" r="7"/><circle cx="94" cy="30" r="7"/><circle cx="110" cy="30" r="7"/><circle cx="126" cy="30" r="7"/></g>
+ <text x="78" y="60" text-anchor="middle" class="s">1 strand</text>
+ <text x="78" y="78" text-anchor="middle" class="s mu">break anywhere = 1 bond</text>
+ <text x="78" y="96" text-anchor="middle" class="s" fill="var(--actin)">unstable</text>
+ <g fill="var(--mt)">
+  <g><circle cx="220" cy="22" r="7"/><circle cx="236" cy="22" r="7"/><circle cx="252" cy="22" r="7"/><circle cx="268" cy="22" r="7"/><circle cx="284" cy="22" r="7"/><circle cx="300" cy="22" r="7"/><circle cx="316" cy="22" r="7"/></g>
+  <g opacity=".7"><circle cx="220" cy="38" r="7"/><circle cx="236" cy="38" r="7"/><circle cx="252" cy="38" r="7"/><circle cx="268" cy="38" r="7"/><circle cx="284" cy="38" r="7"/><circle cx="300" cy="38" r="7"/><circle cx="316" cy="38" r="7"/></g>
+  <g><circle cx="220" cy="54" r="7"/><circle cx="236" cy="54" r="7"/><circle cx="252" cy="54" r="7"/><circle cx="268" cy="54" r="7"/><circle cx="284" cy="54" r="7"/><circle cx="300" cy="54" r="7"/><circle cx="316" cy="54" r="7"/></g>
+ </g>
+ <text x="268" y="84" text-anchor="middle" class="s">many strands side by side</text>
+ <text x="268" y="102" text-anchor="middle" class="s mu">break middle = many bonds</text>
+ <text x="268" y="120" text-anchor="middle" class="s" fill="var(--mt)">stable</text>
+ <text x="180" y="144" text-anchor="middle" class="s mu">but removing from an END still breaks only a few bonds → dynamic</text>
+</svg>
+<p>Microtubules are the "stiffest and straighter structural elements, much more rigid than actin". Two kinds of contact hold them: <b>longitudinal</b> (subunit to subunit along a strand, extremely tight) and <b>lateral</b> (strand to strand). Addition and loss of subunits happen "<b>exclusively at the ends</b>".</p>
+</div>
+
+<div class="card">
+<h3>Things that change microtubules</h3>
+<div class="star"><b>Drugs (bold on slide):</b> <b>Taxol</b> binds microtubules and <b>stabilises</b> them (pushes toward polymerisation). <b>Colchicine</b> and <b>nocodazole</b> bind tubulin subunits (push toward depolymerisation). Both "preferentially kill dividing cells, since <b>microtubule dynamics is crucial</b> for correct function of the mitotic spindle". That is why they are cancer drugs.</div>
+<div class="cmp">
+<div><b>Catastrophe factors (Kinesin-13)</b> bind the microtubule ends and peel them apart → more depolymerisation, more "catastrophes".</div>
+<div><b>XMAP215</b> binds tubulin dimers and delivers them to the + end → faster growth, catastrophes suppressed.</div>
+<div><b>Stathmin</b> binds <b>two</b> tubulin heterodimers at once so they can't be added to the end → less assembly.</div>
+<div><b>Katanin</b> severs; releases microtubules from the MTOC → rapid depolymerisation. Used at the spindle poles during mitosis.</div>
+<div><b>MAPs (microtubule-associated proteins)</b> hundreds of them. Tau and MAP2 bind along the sides and stabilise / bundle. <b>Plectin</b> links microtubules to intermediate filaments.</div>
+<div><b>+TIPs (plus-end tracking proteins)</b> stay on the growing + end and link it to other structures such as membranes.</div>
+</div>
+<ul class="words"><li>Taxol = stabilise</li><li>colchicine · nocodazole = block</li><li>kinesin-13</li><li>XMAP215</li><li>stathmin</li><li>katanin</li><li>MAPs · +TIPs</li></ul>
+</div>
+</details>
+
+<!-- ===================== IF ===================== -->
+<details class="sec">
+<summary><span class="n">L7</span>Intermediate filaments</summary>
+
+<div class="card">
+<h3>Built like a rope, no direction</h3>
+<svg viewBox="0 0 360 210" role="img" aria-label="IF assembly">
+ <g class="s">
+ <text x="10" y="28">1 monomer</text>
+ <path d="M120 24 q20 -6 40 0 t40 0 t40 0 t40 0" fill="none" stroke="var(--if)" stroke-width="3"/>
+ <text x="10" y="74">2 dimer</text>
+ <path d="M120 66 q20 -6 40 0 t40 0 t40 0 t40 0" fill="none" stroke="var(--if)" stroke-width="3"/>
+ <path d="M120 74 q20 6 40 0 t40 0 t40 0 t40 0" fill="none" stroke="var(--if)" stroke-width="3" opacity=".5"/>
+ <text x="290" y="74" class="mu">→ →</text>
+ <text x="10" y="124">3 tetramer</text>
+ <path d="M120 110 q20 -6 40 0 t40 0 t40 0" fill="none" stroke="var(--if)" stroke-width="3"/>
+ <path d="M120 118 q20 6 40 0 t40 0 t40 0" fill="none" stroke="var(--if)" stroke-width="3" opacity=".5"/>
+ <text x="250" y="118" class="mu">→</text>
+ <path d="M180 132 q20 -6 40 0 t40 0 t40 0" fill="none" stroke="var(--if)" stroke-width="3"/>
+ <path d="M180 140 q20 6 40 0 t40 0 t40 0" fill="none" stroke="var(--if)" stroke-width="3" opacity=".5"/>
+ <text x="160" y="140" text-anchor="end" class="mu">←</text>
+ <text x="10" y="186">4 filament</text>
+ <g stroke="var(--if)" stroke-width="2.5" fill="none">
+  <path d="M120 172 q15 -5 30 0 t30 0 t30 0 t30 0 t30 0 t30 0"/><path d="M120 180 q15 5 30 0 t30 0 t30 0 t30 0 t30 0 t30 0"/>
+  <path d="M120 188 q15 -5 30 0 t30 0 t30 0 t30 0 t30 0 t30 0"/><path d="M120 196 q15 5 30 0 t30 0 t30 0 t30 0 t30 0 t30 0"/>
+ </g>
+ </g>
+</svg>
+<p><b>Monomer:</b> a long string with a conserved <b>α-helical</b> middle, NH₂ at one end and COOH at the other. <b>Dimer:</b> two monomers twist together the same way (coiled coil, 48 nm). <b>Tetramer:</b> two dimers lie side by side, staggered, <b>pointing opposite directions</b>. Because they point opposite ways, both ends of the tetramer look the same → <b>no polarity</b>. <b>Filament:</b> 8 tetramers (= protofilaments) pack side by side into a rope held by lateral hydrophobic contacts.</p>
+<div class="star"><b>Remember the list:</b> symmetrical, no structural polarity · no nucleotide binding site · no hydrolysis · can be disassembled rapidly when needed · line the inner face of the nuclear envelope (protective cage for DNA) · in the cytosol twisted into strong cables · <b>higher resistance to stretching and bending than actin or microtubules</b> · <b>main function: provide mechanical strength</b>.</div>
+<p>Assembly / disassembly is "less understood" but is regulated by <b>protein phosphorylation</b>. The network is remodelled during <b>cell division, migration and differentiation</b>.</p>
+<ul class="words"><li>coiled-coil dimer</li><li>staggered tetramer</li><li>8 protofilaments</li><li>no polarity</li><li>phosphorylation</li></ul>
+</div>
+</details>
+
+<!-- ===================== motors ===================== -->
+<details class="sec">
+<summary><span class="n">L8</span>Motor proteins</summary>
+
+<div class="card">
+<h3>Actin's three jobs (slide 2 of L8)</h3>
+<div class="star">① Determine the shape of the cell surface and provide strength.<br>② <b>Necessary for cell locomotion. Form cell-surface projections (lamellipodia and filopodia).</b> (This one is boxed on the slide.)<br>③ Drive pinching of one cell into two (cell division).</div>
+</div>
+
+<div class="card">
+<h3>Walkers that carry cargo</h3>
+<svg viewBox="0 0 360 150" role="img" aria-label="motor directions">
+ <rect x="60" y="64" width="270" height="20" rx="10" fill="var(--mt)"/>
+ <text x="195" y="78" text-anchor="middle" class="w s">microtubule</text>
+ <circle cx="60" cy="74" r="22" fill="var(--soft)" stroke="var(--mt)" stroke-width="2"/>
+ <text x="60" y="78" text-anchor="middle" class="s">MTOC</text>
+ <text x="60" y="118" text-anchor="middle" class="s">− end · centre</text>
+ <text x="300" y="118" text-anchor="middle" class="s">+ end · edge</text>
+ <path d="M170 44 l80 0" stroke="var(--acc)" stroke-width="4" marker-end="url(#aa)"/>
+ <text x="210" y="24" text-anchor="middle">Kinesin → out</text>
+ <text x="190" y="146" text-anchor="middle">Dynein → in</text>
+ <path d="M230 104 l-80 0" stroke="var(--if)" stroke-width="4" marker-end="url(#ab)"/>
+ <defs>
+  <marker id="aa" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8z" fill="var(--acc)"/></marker>
+  <marker id="ab" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8z" fill="var(--if)"/></marker>
+ </defs>
+</svg>
+<p>A motor protein grabs a <b>polarised</b> filament and walks along it using energy from <b>repeated cycles of ATP hydrolysis</b>. Their main job: "organise membrane-enclosed organelles in appropriate locations in the cell".</p>
+<div class="star"><b>Motors are classified by 3 things:</b> ① which filament they bind (actin or microtubule) ② which direction they move (kinesins vs dyneins) ③ what they carry (membrane-enclosed organelles, or other cytoskeletal filaments).</div>
+<div class="cmp">
+<div><b>Myosin</b> walks on <span class="ra">actin</span>, toward the + end. Myosin II = muscle and non-muscle contraction. Myosin V = carries organelles along actin; different tails and light chains let each myosin pick its cargo. (Lever arm swings 30-40 nm.)</div>
+<div><b>Kinesin</b> walks on <span class="rm">microtubules</span> toward the + end = out to the periphery. Motor domain is at the <b>N-terminus of the heavy chain</b>. Links to an organelle via a light chain or adaptor protein.</div>
+<div><b>Dynein</b> walks on <span class="rm">microtubules</span> toward the − end = in to the centre. "The largest molecular motors and one of the fastest." Made of 1, 2 or 3 heavy chains (with the motor) plus many intermediate and light chains.</div>
+</div>
+<div class="say"><b>Polarised transport:</b> microtubules sit with − ends at the centrosome and + ends at the edge. So <b>kinesin moves vesicles toward the periphery</b>, <b>dynein toward the centre</b>. "Major function of the cytoskeletal motors: <b>transport and positioning</b> of membrane-enclosed organelles."</div>
+<details class="more"><summary>More detail: dynein types</summary><div class="in"><ul>
+<li><b>Cytoplasmic dyneins</b> (homodimers of two heavy chains):<br>Dynein 1: organelle and mRNA trafficking, positioning the centrosome and nucleus during migration, building the spindle in mitosis and meiosis.<br>Dynein 2: only in organisms with cilia; carries material from tip to base of the cilium (intraflagellar transport).</li>
+<li><b>Axonemal (ciliary) dyneins</b> (monomers, heterodimers, heterotrimers with 1-3 motor heavy chains): fast sliding of microtubules that drives beating of cilia and flagella.</li>
+</ul></div></details>
+<ul class="words"><li>polarised filament</li><li>ATP hydrolysis cycles</li><li>kinesin + end</li><li>dynein − end</li><li>N-terminus motor domain</li></ul>
+</div>
+
+<div class="card">
+<h3>Myosin II shape</h3>
+<p>Two heads (N-terminus) with <b>light chains</b> at the <b>neck or hinge</b>, then a long <b>coiled coil of two α-helices</b> (about 150 nm) ending at the C-terminus. The tails of many myosin II stick together (tail-tail) to make a big <b>bipolar thick filament</b> with <b>~300 heads</b>, heads pointing opposite ways at the two ends and a bare zone in the middle.</p>
+<div class="say"><b>Actin-myosin complex</b> = contractile structures that cross-link and slide actin filaments, in muscle AND non-muscle cells.<br><b>Switch-on:</b> when <b>MLCK</b> (myosin light chain kinase) phosphorylates the light chains, the tail unfolds and the myosins self-assemble (active state). Not phosphorylated = folded, inactive.</div>
+</div>
+
+<div class="card">
+<h3>How myosin takes one step (cross-bridge cycle)</h3>
+<svg viewBox="0 0 360 380" role="img" aria-label="myosin cycle">
+ <g class="s">
+  <g transform="translate(0,0)">
+   <rect width="172" height="180" rx="10" fill="var(--soft)"/>
+   <g fill="var(--actin)"><circle cx="26" cy="26" r="7"/><circle cx="42" cy="26" r="7"/><circle cx="58" cy="26" r="7"/><circle cx="74" cy="26" r="7"/><circle cx="90" cy="26" r="7"/><circle cx="106" cy="26" r="7"/><circle cx="122" cy="26" r="7"/><circle cx="138" cy="26" r="7"/></g>
+   <path d="M90 33 l0 34 l-26 24" stroke="var(--mt)" stroke-width="6" fill="none" stroke-linecap="round"/>
+   <text x="14" y="124" font-weight="700">1 Attached</text>
+   <text x="14" y="144">no ATP</text><text x="14" y="162">holding tight</text>
+  </g>
+  <g transform="translate(188,0)">
+   <rect width="172" height="180" rx="10" fill="var(--soft)"/>
+   <g fill="var(--actin)"><circle cx="26" cy="26" r="7"/><circle cx="42" cy="26" r="7"/><circle cx="58" cy="26" r="7"/><circle cx="74" cy="26" r="7"/><circle cx="90" cy="26" r="7"/><circle cx="106" cy="26" r="7"/><circle cx="122" cy="26" r="7"/><circle cx="138" cy="26" r="7"/></g>
+   <path d="M90 46 l0 24 l-26 24" stroke="var(--mt)" stroke-width="6" fill="none" stroke-linecap="round" opacity=".5"/>
+   <text x="14" y="124" font-weight="700">2 Released</text>
+   <text x="14" y="144">ATP binds</text><text x="14" y="162">head lets go</text>
+  </g>
+  <g transform="translate(0,200)">
+   <rect width="172" height="180" rx="10" fill="var(--soft)"/>
+   <g fill="var(--actin)"><circle cx="26" cy="26" r="7"/><circle cx="42" cy="26" r="7"/><circle cx="58" cy="26" r="7"/><circle cx="74" cy="26" r="7"/><circle cx="90" cy="26" r="7"/><circle cx="106" cy="26" r="7"/><circle cx="122" cy="26" r="7"/><circle cx="138" cy="26" r="7"/></g>
+   <path d="M106 46 l-16 24 l-30 18" stroke="var(--mt)" stroke-width="6" fill="none" stroke-linecap="round" opacity=".5"/>
+   <text x="14" y="124" font-weight="700">3 Cocked</text>
+   <text x="14" y="144">ATP → ADP + Pi</text><text x="14" y="162">arm swings forward</text>
+  </g>
+  <g transform="translate(188,200)">
+   <rect width="172" height="180" rx="10" fill="var(--soft)"/>
+   <g fill="var(--actin)"><circle cx="26" cy="26" r="7"/><circle cx="42" cy="26" r="7"/><circle cx="58" cy="26" r="7"/><circle cx="74" cy="26" r="7"/><circle cx="90" cy="26" r="7"/><circle cx="106" cy="26" r="7"/><circle cx="122" cy="26" r="7"/><circle cx="138" cy="26" r="7"/></g>
+   <path d="M106 33 l0 34 l-26 24" stroke="var(--mt)" stroke-width="6" fill="none" stroke-linecap="round"/>
+   <text x="14" y="124" font-weight="700">4 Power stroke</text>
+   <text x="14" y="144">Pi leaves, grips, pulls</text><text x="14" y="162">then ADP leaves</text>
+  </g>
+ </g>
+</svg>
+<div class="star"><b>1 Attached:</b> a myosin head with <b>no ATP</b> is tightly bound to actin (rigor).<br><b>2 Released:</b> <b>ATP binds</b> to the back of the head → small shape change in the actin-binding site → head lets go.<br><b>3 Cocked:</b> <b>ATP hydrolysis</b> triggers the lever arm to move. ADP and Pi stay tightly bound.<br><b>4 Force-generating:</b> head binds weakly to a new site → <b>Pi is released</b> → tight binding → the <b>power stroke</b> (force-generating shape change) → ADP leaves → back to 1.</div>
+<div class="say"><b>Kinesin cycle (two heads):</b> rear head is tightly bound with ATP; leading head is loosely bound with ADP. ADP dissociation + ATP hydrolysis = power stroke. ATP binding to the rear head flips a small peptide (the <b>neck linker</b>), pulling the rear head forward: it detaches, passes the partner head, and rebinds the next tubulin site. Hand over hand.</div>
+</div>
+</details>
+
+<!-- ===================== muscle ===================== -->
+<details class="sec">
+<summary><span class="n">L8</span>Muscle contraction</summary>
+
+<div class="card">
+<h3>Sarcomere = one unit of muscle</h3>
+<svg viewBox="0 0 360 160" role="img" aria-label="sarcomere">
+ <rect x="20" y="20" width="7" height="100" fill="var(--if)"/><rect x="333" y="20" width="7" height="100" fill="var(--if)"/>
+ <text x="23" y="14" text-anchor="middle" class="s">Z</text><text x="336" y="14" text-anchor="middle" class="s">Z</text>
+ <line x1="180" y1="20" x2="180" y2="120" stroke="var(--mute)" stroke-dasharray="3 3"/><text x="180" y="14" text-anchor="middle" class="s">M</text>
+ <g stroke="var(--actin)" stroke-width="4">
+  <line x1="27" y1="36" x2="140" y2="36"/><line x1="27" y1="70" x2="140" y2="70"/><line x1="27" y1="104" x2="140" y2="104"/>
+  <line x1="333" y1="36" x2="220" y2="36"/><line x1="333" y1="70" x2="220" y2="70"/><line x1="333" y1="104" x2="220" y2="104"/>
+ </g>
+ <g stroke="var(--mt)" stroke-width="9" stroke-linecap="round"><line x1="100" y1="53" x2="260" y2="53"/><line x1="100" y1="87" x2="260" y2="87"/></g>
+ <text x="180" y="146" text-anchor="middle" class="s"><tspan fill="var(--actin)">thin = actin</tspan>  ·  <tspan fill="var(--mt)">thick = myosin II</tspan></text>
+</svg>
+<p>A muscle cell (muscle fibre) is packed with myofibrils. Each myofibril is a chain of <b>sarcomeres</b>: "a highly organised array of parallel and partly overlapping thin (actin) and thick (myosin) filaments". Under the microscope you see dark bands (thick + thin overlap) and light bands (thin only), with a <b>Z disc</b> at each end and the <b>M line</b> in the middle.</p>
+<div class="star"><b>How it contracts (slide bold):</b> <b>Myosin II generates the force.</b> Each myosin head binds and hydrolyses ATP and uses the energy to <b>walk toward the plus end</b> of an actin filament. The thick filament is <b>bipolar</b> (heads at the two ends face opposite ways), so it slides the two oppositely oriented sets of actin toward the middle → the sarcomere shortens → muscle contracts.</div>
+<div class="cmp">
+<div><b>Z disc</b> the actin <b>+ ends are anchored</b> here, "built from capping proteins" (CapZ). The caps stop depolymerisation and hold the filaments together. The − ends point to the middle and are capped by <b>tropomodulin</b>. Nebulin runs along the thin filament.</div>
+<div><b>Titin</b> big elastic molecule closely associated with the myosin filament; it changes length as the sarcomere contracts and relaxes (keeps myosin centred).</div>
+<div><b>Other coat proteins</b> cover the filaments and cap the ends "to avoid depolymerisation".</div>
+</div>
+<div class="say"><b>Ca²⁺ is the on switch.</b> Muscle contraction depends on <b>two processes that use a lot of ATP: filament sliding and Ca²⁺ pumping</b>. Ca²⁺ is released by the <b>sarcoplasmic reticulum</b>; Ca²⁺ flooding the cytosol starts contraction of each myofibril. The <b>troponin complex (I, C, T)</b> and <b>tropomyosin</b> sit on the thin filament and, with Ca²⁺, move to let myosin bind. The <b>increase in Ca²⁺ is transient</b>: Ca²⁺-ATPase pumps rapidly pump it back into the SR membrane, concentration returns to resting level, myofibrils relax.</div>
+<ul class="words"><li>sarcomere</li><li>Z disc · M line</li><li>dark band · light band</li><li>bipolar thick filament</li><li>titin · nebulin</li><li>troponin I C T</li><li>Ca²⁺ transient</li></ul>
+</div>
+</details>
+
+<!-- ===================== migration ===================== -->
+<details class="sec">
+<summary><span class="n">L8</span>How cells crawl</summary>
+
+<div class="card">
+<h3>Who crawls and why it matters</h3>
+<p>"Almost all cell locomotion occurs by crawling."</p>
+<div class="cmp">
+<div><b>Nerve cells</b> long-distance crawling builds the entire nervous system.</div>
+<div><b>Macrophages and neutrophils</b> crawl to sites of infection and eat invaders (innate immune response).</div>
+<div><b>Osteoclasts</b> dig channels in bone; <b>osteoblasts</b> fill them in (continuous bone remodelling).</div>
+<div><b>Fibroblasts</b> crawl through connective tissue, remodel it and repair damage.</div>
+<div><b>Cancer cells</b> crawl out of a tumour into blood or lymph vessels and come out elsewhere = <b>metastasis</b>.</div>
+</div>
+</div>
+
+<div class="card">
+<h3>First the cell needs a front and a back</h3>
+<p>"Cytoskeleton determines cellular organisation and polarity." It lets a cell tell <b>top from bottom</b> (apical vs basal, like gut cells with microvilli on top) or <b>front from back</b>, by building different structures with different molecules at each end.</p>
+<div class="star"><b>Cell locomotion requires an initial polarization</b> of the cell to set it off in a particular direction.</div>
+<p>Three processes make this happen: dynamic assembly / disassembly of the polymers · regulation by polymer-associated proteins · motor proteins pulling on the polymers (tension).</p>
+</div>
+
+<div class="card">
+<h3>Front vs back: Rho family switches</h3>
+<svg viewBox="0 0 360 120" role="img" aria-label="Rho family">
+ <g class="s">
+  <rect x="4" y="10" width="110" height="100" rx="10" fill="var(--soft)"/>
+  <text x="59" y="36" text-anchor="middle" font-weight="700">Cdc42</text>
+  <text x="59" y="62" text-anchor="middle">filopodia</text><text x="59" y="80" text-anchor="middle" class="mu">(spikes)</text>
+  <rect x="125" y="10" width="110" height="100" rx="10" fill="var(--soft)"/>
+  <text x="180" y="36" text-anchor="middle" font-weight="700">Rac</text>
+  <text x="180" y="62" text-anchor="middle">lamellipodia</text><text x="180" y="80" text-anchor="middle" class="mu">FRONT</text><text x="180" y="98" text-anchor="middle" class="mu">less myosin</text>
+  <rect x="246" y="10" width="110" height="100" rx="10" fill="var(--soft)"/>
+  <text x="301" y="36" text-anchor="middle" font-weight="700">Rho</text>
+  <text x="301" y="62" text-anchor="middle">stress fibres</text><text x="301" y="80" text-anchor="middle" class="mu">BACK</text><text x="301" y="98" text-anchor="middle" class="mu">more myosin</text>
+ </g>
+</svg>
+<p>Polarity "depends on the local regulation of the actin cytoskeleton", switched on by outside cues through receptors, or by inside signals. The outside signals work through the <b>Rho protein family: Cdc42, Rac, Rho</b>.</p>
+<div class="cmp">
+<div><b>Rac-GTP (front)</b> → WASp family → <b>Arp2/3</b> → branched actin web = <b>lamellipodium</b>. Also → PAK → blocks MLCK → <b>less myosin activity</b>, fewer stress fibres. Also filamin (web cross-linker).</div>
+<div><b>Rho-GTP (back)</b> → ROCK (Rho kinase) → MLC phosphorylated → <b>more myosin</b>; → LIM kinase → blocks cofilin; → formins → actin bundles. Result: <b>more stress fibres</b> → integrin clustering and <b>focal adhesion formation</b>.</div>
+<div><b>Cdc42</b> → <b>filopodia</b> (thin spikes of parallel actin).</div>
+</div>
+<div class="say"><b>External signals, two types:</b><br><b>Chemotaxis</b> = movement toward or away from a <b>diffusible</b> chemical (a gradient). Example on the slide: a neutrophil chasing a bacterium; at the front Rac dominates (polymerisation, protrusion), at the back Rho dominates (actin-myosin contraction), and the two inhibit each other.<br><b>Non-diffusible cues</b> stuck to the ECM or to another cell's surface → activate receptors → more adhesion and directed actin polymerisation → steer the direction.</div>
+<ul class="words"><li>Cdc42 → filopodia</li><li>Rac → lamellipodia</li><li>Rho → stress fibres</li><li>WASp · Arp2/3</li><li>ROCK · MLCK</li><li>chemotaxis</li></ul>
+</div>
+
+<div class="card">
+<h3>Push, stick, pull</h3>
+<svg viewBox="0 0 360 230" role="img" aria-label="crawling cell">
+ <text x="20" y="22" class="s">BACK</text><text x="340" y="22" text-anchor="end" class="s">FRONT</text>
+ <text x="20" y="42" class="s" fill="var(--mt)">myosin squeezes</text>
+ <text x="340" y="42" text-anchor="end" class="s" fill="var(--actin)">actin pushes</text>
+ <path d="M60 50 l0 22" stroke="var(--mt)" stroke-width="2" marker-end="url(#ag)"/>
+ <path d="M300 50 l0 60" stroke="var(--actin)" stroke-width="2" marker-end="url(#ar)"/>
+ <rect x="10" y="170" width="340" height="8" fill="var(--hl)"/>
+ <text x="180" y="196" text-anchor="middle" class="s mu">ground (ECM)</text>
+ <path d="M50 170 C45 100 150 80 220 92 C270 100 300 130 320 160 L330 170 Z" fill="var(--soft)" stroke="var(--fg)" stroke-width="2"/>
+ <circle cx="140" cy="130" r="18" fill="var(--card)" stroke="var(--fg)"/>
+ <path d="M280 154 C310 142 340 154 352 166 L352 170 L300 170 Z" fill="var(--actin)"/>
+ <g fill="var(--if)"><rect x="90" y="165" width="22" height="6"/><rect x="170" y="165" width="22" height="6"/><rect x="250" y="165" width="22" height="6"/><rect x="310" y="165" width="22" height="6"/></g>
+ <text x="180" y="220" text-anchor="middle" class="s" fill="var(--if)">blue = focal adhesions (integrins)</text>
+</svg>
+<p>"Cell migration depends on the actin beneath the plasma membrane." Three activities that "may happen simultaneously or in a more independent way":</p>
+<div class="cmp">
+<div><b class="ra">1 Protrusion</b> the plasma membrane is pushed out at the front (while the back contracts). Actin polymerisation at the + ends pushes out the <b>lamellipodium</b>. The actin cortex is under tension.</div>
+<div><b class="ri">2 Attachment</b> the actin cytoskeleton connects across the plasma membrane to the substratum, through <b>focal adhesions (which contain integrins)</b>.</div>
+<div><b class="rm">3 Traction</b> the bulk of the cytoplasm is drawn forward. Myosin II contracts at the back.</div>
+</div>
+<div class="star"><b>Two rules on the slide:</b> "Protrusion of the membrane is followed by adhesion to the substratum at the front." And "<b>Contraction must be coupled with de-adhesion at the rear</b> of the cell." Coordinated movement = actin polymerisation + dynamic adhesions + myosin contraction.</div>
+</div>
+
+<div class="card">
+<h3>4 ways actin is arranged</h3>
+<p>"Different types of protrusive structures depend on specialised accessory proteins." The slide shows 4 arrays in one cell:</p>
+<div class="cmp">
+<div><b>Contractile bundle</b> = <b>stress fibre</b>. Loose bundle (α-actinin), myosin fits between the filaments.</div>
+<div><b>Gel-like network</b> = <b>cell cortex</b>. Made by gel-forming proteins with actin-binding sites (filamin).</div>
+<div><b>Dendritic (branched) network</b> = <b>lamellipodium</b>. Nucleated by <b>Arp2/3</b>.</div>
+<div><b>Tight parallel bundle</b> = <b>filopodium</b>. Bundling proteins cross-link filaments into a parallel array, produced by <b>formins</b>.</div>
+</div>
+</div>
+
+<div class="card">
+<h3>The front keeps recycling actin</h3>
+<svg viewBox="0 0 360 200" role="img" aria-label="lamellipodium">
+ <text x="95" y="20" text-anchor="middle" class="s">old ADP-actin</text>
+ <text x="95" y="38" text-anchor="middle" class="s mu">cofilin breaks it up</text>
+ <text x="265" y="20" text-anchor="middle" class="s">new ATP-actin</text>
+ <text x="265" y="38" text-anchor="middle" class="s mu">Arp2/3 builds it</text>
+ <rect x="10" y="50" width="340" height="100" rx="8" fill="var(--soft)"/>
+ <line x1="340" y1="50" x2="340" y2="150" stroke="var(--fg)" stroke-width="3"/>
+ <g stroke="var(--actin)" stroke-width="3" fill="none"><path d="M220 135 L330 85"/><path d="M250 122 L325 140"/><path d="M265 115 L330 65"/></g>
+ <g stroke="var(--mute)" stroke-width="3" fill="none" opacity=".5"><path d="M30 135 L120 95"/><path d="M60 125 L120 140"/><path d="M80 120 L160 70"/></g>
+ <path d="M130 172 l100 0" stroke="var(--fg)" stroke-width="2" stroke-dasharray="3 3" marker-end="url(#af)"/>
+ <text x="180" y="194" text-anchor="middle" class="s mu">freed beads float to the front again</text>
+</svg>
+<div class="star"><b>Four slide bullets, learn in order:</b><br>① Filament <b>nucleation is localised at the leading edge</b>; new actin grows there to push the membrane forward.<br>② Most <b>depolymerisation happens well behind</b> the leading edge.<br>③ <b>Cofilin</b> prefers ADP-actin. New T-form filaments resist cofilin. As filaments age and ATP is hydrolysed, cofilin can take the older filaments apart.<br>④ <b>Delayed ATP hydrolysis → treadmilling</b> in the lamellipodium.</div>
+<p>Capping protein stops the older + ends; the freed monomers diffuse back to the leading edge and get used again.</p>
+</div>
+
+<div class="card">
+<h3>Myosin II and microtubules in crawling, and the clutch</h3>
+<div class="cmp">
+<div><b>Roles of myosin II in migration (4):</b> ① helps connect actin to the substratum through integrin adhesions ② actin polymerisation + myosin activity create <b>tension at attachment sites</b>, which matures them into <b>focal adhesions</b> ③ bipolar myosin II at the rear of the lamellipodium pulls actin filaments into a new orientation ④ sarcomere-like contraction prevents protrusion at the sides and pinches them in, gathering the cell as it moves.</div>
+<div><b>Roles of microtubules in migration (3):</b> ① organise persistent movement in one direction (the centrosome's position follows where protrusion happens) ② influence actin rearrangement and guide focal adhesion dynamics ③ transport cargo to and from focal adhesions, affecting their signalling and disassembly.</div>
+<div><b>Strong interactions = clutch.</b> "Strong interactions between the actin network and the focal adhesions are required to push the leading edge forward." Myosin force is transmitted to the ECM through the focal adhesions → traction → new actin polymerisation drives the leading edge forward.</div>
+<div><b>Retrograde flow</b> = when the actin-adhesion interactions are <b>disengaged</b>, polymerisation pressure at the front plus myosin contraction make the actin network <b>slip backward</b> instead of pushing the cell forward. <b>Engaged</b> = force goes into the ground and the edge advances.</div>
+<div><b>Stretch a cell</b> (external mechanical tension) → it assembles more stress fibres and focal adhesions and becomes more contractile.</div>
+</div>
+<div class="say"><b>Migration overall:</b> "Driven primarily by actin polymerisation and myosin contractility. Interactions among filaments are required; microtubules and intermediate filaments also participate. Mechanical linkage to the nucleus is required."</div>
+</div>
+
+<div class="card">
+<h3>Summary slide (learn word for word)</h3>
+<div class="star"><b>For a cell to crawl, it must:</b><br>① Generate and maintain an overall structural polarity (influenced by external cues).<br>② Coordinate protrusion at the leading edge (by assembly of new actin filaments).<br>③ Coordinate adhesion of the newly protruded part of the cell to the substratum.<br>④ Coordinate forces generated by molecular motors to bring the cell body forward.</div>
+</div>
+</details>
+
+<!-- ===================== SELF TEST ===================== -->
+<details class="sec">
+<summary><span class="n">✓</span>Test yourself (tap to reveal)</summary>
+<div class="card">
+<details class="q"><summary>Which filament has no polarity and no nucleotide?</summary><div class="a">Intermediate filaments. Tetramers are made of two dimers pointing opposite ways, so both ends are identical. No ATP/GTP binding site, no hydrolysis.</div></details>
+<details class="q"><summary>What are the subunits of actin, microtubules and intermediate filaments?</summary><div class="a">Actin: globular G-actin bound to ATP. Microtubule: αβ-tubulin heterodimer bound to GTP. IF: elongated fibrous subunit with a conserved α-helical domain.</div></details>
+<details class="q"><summary>How many protofilaments in each?</summary><div class="a">Actin 2 (helix), microtubule 13 (hollow tube), intermediate filament 8 tetramers (rope).</div></details>
+<details class="q"><summary>Name the 3 phases of actin polymerisation.</summary><div class="a">Nucleation (lag phase) → elongation (growth phase) → steady state (equilibrium phase).</div></details>
+<details class="q"><summary>What happens when C &lt; C<sub>c</sub>?</summary><div class="a">Hydrolysis at both ends; elongation is slower than dissociation; the filament shrinks. (C &gt; C<sub>c</sub> grows, C = C<sub>c</sub> stays the same.)</div></details>
+<details class="q"><summary>Which end has the higher critical concentration, and why does it matter?</summary><div class="a">The minus (pointed) end: C<sub>c</sub>(minus) &gt; C<sub>c</sub>(plus). Between the two values, subunits add at + and leave at − = treadmilling. Pointing + ends at the leading edge pushes the membrane forward.</div></details>
+<details class="q"><summary>T form vs D form?</summary><div class="a">T form = ATP-actin, grows more favourably. D form = ADP-actin, dissociates more favourably. Most soluble subunits are T form.</div></details>
+<details class="q"><summary>Three requirements for actin polymerisation?</summary><div class="a">Actin monomer availability, filament nucleation, fibre elongation.</div></details>
+<details class="q"><summary>Profilin vs thymosin?</summary><div class="a">Both bind free monomers and compete. Thymosin blocks assembly (slows). Profilin binds opposite the ATP site, exposes the + end binding face, speeds elongation.</div></details>
+<details class="q"><summary>Arp2/3 vs formin?</summary><div class="a">Arp2/3 nucleates on the side of a filament, caps the − end → branched web (lamellipodia). Formin is a dimer that nucleates and stays on the growing + end → straight parallel filaments (filopodia, stress fibres).</div></details>
+<details class="q"><summary>Which protein caps the plus end, which caps the minus end?</summary><div class="a">CapZ (capping protein) caps the plus end. Tropomodulin caps the minus end.</div></details>
+<details class="q"><summary>Gelsolin vs cofilin?</summary><div class="a">Both sever. Gelsolin is activated by high cytosolic Ca²⁺ and caps the + end. Cofilin binds ADP-actin, so it disassembles older filaments.</div></details>
+<details class="q"><summary>Which tubulin is at the plus end of a microtubule?</summary><div class="a">β-tubulin at the plus end, α-tubulin exposed at the minus end.</div></details>
+<details class="q"><summary>What is the γ-TuRC and where is it?</summary><div class="a">γ-tubulin ring complex: two accessory proteins bind γ-tubulin to make a spiral ring that templates a 13-protofilament microtubule. Found at the MTOC / centrosome, stays at the minus end.</div></details>
+<details class="q"><summary>Are centrioles required for microtubule nucleation?</summary><div class="a">No. They recruit γ-rings but are "not absolutely required".</div></details>
+<details class="q"><summary>Why do Taxol and colchicine kill dividing cells?</summary><div class="a">Taxol stabilises microtubules, colchicine/nocodazole block tubulin. Either way dynamics stop, and microtubule dynamics is crucial for the mitotic spindle.</div></details>
+<details class="q"><summary>Kinesin-13, XMAP215, stathmin, katanin: one line each.</summary><div class="a">Kinesin-13 = catastrophe factor, peels ends apart. XMAP215 = delivers dimers to + end, growth up. Stathmin = binds 2 dimers, blocks addition. Katanin = severs, frees MTs from the MTOC.</div></details>
+<details class="q"><summary>Main function of intermediate filaments, and how is their assembly regulated?</summary><div class="a">Mechanical strength (highest resistance to stretching and bending; cage around the nucleus). Regulated by protein phosphorylation.</div></details>
+<details class="q"><summary>Motor proteins are classified by which 3 things?</summary><div class="a">Filament they bind (actin or microtubule), direction they move (kinesin + / dynein −), molecules they carry.</div></details>
+<details class="q"><summary>Which motor goes to the cell periphery, which to the centre?</summary><div class="a">Kinesin → plus end → periphery. Dynein → minus end → centre. Myosin walks on actin toward the plus end.</div></details>
+<details class="q"><summary>Put the myosin cycle in order with the ATP events.</summary><div class="a">Attached (no ATP, tight) → Released (ATP binds) → Cocked (ATP hydrolysis moves lever arm, ADP+Pi bound) → Force-generating (weak bind new site, Pi released, tight bind, power stroke, ADP released).</div></details>
+<details class="q"><summary>What activates myosin II?</summary><div class="a">MLCK phosphorylates the light chains → tail unfolds → spontaneous self-assembly into filaments.</div></details>
+<details class="q"><summary>Why does a bipolar thick filament shorten a sarcomere?</summary><div class="a">Heads at the two ends point opposite ways. Each head walks toward the actin plus end (anchored at the Z disc), so the two sets of oppositely oriented actin are pulled toward the middle and the Z discs come closer.</div></details>
+<details class="q"><summary>Where are actin plus ends in a sarcomere and what holds them?</summary><div class="a">At the Z disc, anchored by capping proteins (CapZ). Minus ends point to the middle, capped by tropomodulin.</div></details>
+<details class="q"><summary>Two ATP-hungry processes in muscle contraction?</summary><div class="a">Filament sliding and Ca²⁺ pumping (Ca²⁺-ATPase pumps return Ca²⁺ to the sarcoplasmic reticulum, so the Ca²⁺ rise is transient).</div></details>
+<details class="q"><summary>What does titin do?</summary><div class="a">Elastic molecule associated with the myosin filament; changes length as the sarcomere contracts and relaxes.</div></details>
+<details class="q"><summary>Three activities of cell crawling?</summary><div class="a">Protrusion (membrane pushed out at the front, contraction at the back), attachment (actin connects through the membrane to the substratum), traction (cytoplasm drawn forward).</div></details>
+<details class="q"><summary>Cdc42, Rac, Rho: what does each make?</summary><div class="a">Cdc42 → filopodia. Rac → lamellipodia (via WASp → Arp2/3; lowers myosin via PAK). Rho → stress fibres and focal adhesions (via ROCK → more myosin; formins).</div></details>
+<details class="q"><summary>Define chemotaxis.</summary><div class="a">Movement of a cell toward or away from the source of a diffusible chemical (a chemical gradient).</div></details>
+<details class="q"><summary>Match: stress fibre, cell cortex, lamellipodium, filopodium → array type and builder.</summary><div class="a">Stress fibre = contractile bundle. Cortex = gel-like network (gel-forming proteins). Lamellipodium = dendritic network (Arp2/3). Filopodium = tight parallel bundle (bundling proteins, formins).</div></details>
+<details class="q"><summary>Why does cofilin only chew the back of the lamellipodium?</summary><div class="a">Cofilin prefers ADP-actin. New filaments at the front are T form (ATP) and resist it. Hydrolysis is delayed, so only older filaments behind the edge are disassembled → treadmilling.</div></details>
+<details class="q"><summary>What is retrograde flow?</summary><div class="a">When actin-adhesion interactions are disengaged, polymerisation pressure at the leading edge and myosin contraction make the actin network slip backward instead of pushing the cell forward.</div></details>
+<details class="q"><summary>What happens if you stretch a cell?</summary><div class="a">It assembles stress fibres and focal adhesions and becomes more contractile.</div></details>
+<details class="q"><summary>Four things a cell must do to crawl (summary slide)?</summary><div class="a">Generate and maintain polarity (external cues) · coordinate protrusion at the leading edge by new actin assembly · coordinate adhesion of the new part to the substratum · coordinate motor forces to bring the cell body forward.</div></details>
+<details class="q"><summary>Cadherin vs integrin?</summary><div class="a">Cadherin = cell-cell adhesion. Integrin = cell-ECM adhesion; binds ECM outside and actin inside via talin, vinculin, kindlin.</div></details>
+<details class="q"><summary>Two main functions of the ECM, and which cells make it?</summary><div class="a">Mechanical support for cells; regulate cell behaviour. Secreted by fibroblasts.</div></details>
+</div>
+</details>
+
+</div>

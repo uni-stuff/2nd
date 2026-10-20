@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
-"""노트 HTML에 목차·검색·네비게이션을 주입한다.
+"""Turn a note HTML into a tabbed note: one tab per lecture.
 
-  - 왼쪽 고정 목차(넓은 화면) / 오른쪽 슬라이드 패널(좁은 화면). 현재 보는 섹션 자동 표시.
-  - 노트 안 검색. 접힌 <details> 안까지 뒤지고, 맞으면 그 섹션을 펼친다.
-  - 브레드크럼 · 하단 돌아가기 · 우하단 고정 버튼.
+  - Lecture tabs. Sections are grouped by their L-badge and shown one group at a
+    time. Nothing collapses: inside a tab every section is already open.
+    Wide screens get a fixed list on the left, narrow screens a scrollable strip.
+  - Search across the whole note, including tabs that are not currently shown;
+    jumping to a hit switches to its tab.
+  - Breadcrumb back to the folder.
 
-노트를 새 버전으로 교체한 뒤 다시 실행하면 된다. 이전 주입분은 마커로 걷어내고
-다시 넣으므로 몇 번을 돌려도 결과가 같다(멱등).
+Re-run after replacing the note with a newer version. Previous injections are
+stripped by marker first, so the result is the same no matter how often it runs.
 
   python3 tools/enhance-note.py engineering-in-biology/cell-adhesion/cytoskeleton-quiz-notes.html
 """
@@ -14,16 +17,15 @@ import re
 import sys
 import pathlib
 
-# 블록별 제거 패턴. "top" 만 앞의 개행까지 먹어야 재실행 때 빈 줄이 쌓이지 않는다.
+# Removal patterns. Only "top" eats the preceding newline, otherwise a blank
+# line accumulates on every re-run.
 STRIP = [
     r"<!-- uni:head -->.*?<!-- /uni:head -->\n?",
     r"\n?<!-- uni:top -->.*?<!-- /uni:top -->\n?",
+    r"<!-- uni:foot -->.*?<!-- /uni:foot -->\n?",
+    # retired blocks from earlier versions
     r"<!-- uni:bottom -->.*?<!-- /uni:bottom -->\n?",
     r"<!-- uni:fab -->.*?<!-- /uni:fab -->\n?",
-]
-
-# 구버전(마커 없음) 정리용
-STRIP_LEGACY = [
     r"<!-- uni-nav -->\n<style>.*?</style>\n",
     r'<nav class="uni-bc">.*?</nav>\n',
     r'<p class="uni-back">.*?</p>\n',
@@ -33,15 +35,15 @@ STRIP_LEGACY = [
 HEAD = """<!-- uni:head -->
 <style>
 /* Breadcrumb */
-.uni-bc{font-size:.78rem;color:var(--mute);margin:0 0 12px;display:flex;flex-wrap:wrap;gap:5px;align-items:center;font-weight:700}
+.uni-bc{font-size:.78rem;color:var(--mute);margin:0 0 10px;display:flex;flex-wrap:wrap;gap:5px;align-items:center;font-weight:700}
 .uni-bc a{color:var(--mute);text-decoration:none;border-bottom:1px solid transparent}
 .uni-bc a:hover{color:var(--acc);border-bottom-color:var(--acc)}
 .uni-bc .s{opacity:.4}
 
-/* Search bar */
-.uni-search{position:sticky;top:0;z-index:40;background:var(--bg);
-  padding:8px 0 10px;margin:0 0 14px;border-bottom:1px solid var(--line);
-  display:flex;align-items:center;gap:8px}
+/* Sticky header: search + lecture tabs */
+.uni-top{position:sticky;top:0;z-index:40;background:var(--bg);
+  padding:8px 0 9px;margin:0 0 16px;border-bottom:1px solid var(--line)}
+.uni-search{display:flex;align-items:center;gap:8px}
 .uni-search .box{flex:1;display:flex;align-items:center;gap:8px;min-width:0;
   background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 12px}
 .uni-search .box:focus-within{border-color:var(--acc)}
@@ -59,46 +61,41 @@ HEAD = """<!-- uni:head -->
   color:var(--mute);font-family:inherit;font-weight:800;font-size:.8rem;line-height:1}
 .uni-search button:hover:not(:disabled){color:var(--acc);border-color:var(--acc)}
 .uni-search button:disabled{opacity:.35;cursor:default}
-mark.uni-hit{background:var(--hl);color:inherit;border-radius:2px;padding:0 1px;scroll-margin-top:92px}
+mark.uni-hit{background:var(--hl);color:inherit;border-radius:2px;padding:0 1px}
 mark.uni-hit.on{background:var(--acc);color:var(--bg)}
 
-/* Contents — slide-in panel on narrow screens */
-.uni-toc{display:none;position:fixed;top:0;right:0;bottom:0;width:min(300px,82vw);z-index:60;
-  background:var(--card);border-left:1px solid var(--line);box-shadow:-10px 0 30px rgba(0,0,0,.22);
-  overflow-y:auto;-webkit-overflow-scrolling:touch;
-  padding:20px 12px calc(28px + env(safe-area-inset-bottom,0px))}
-.uni-toc.open{display:block}
-.uni-toc .hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 12px;padding:0 6px}
-.uni-toc .hd b{font-size:.68rem;letter-spacing:.11em;text-transform:uppercase;color:var(--mute);font-weight:800}
-.uni-toc .x{width:26px;height:26px;padding:0;cursor:pointer;background:transparent;border:1px solid var(--line);
-  border-radius:7px;color:var(--mute);font-family:inherit;font-weight:800;font-size:.85rem;line-height:1}
-.uni-toc a{display:flex;gap:8px;align-items:baseline;padding:7px 8px;border-radius:7px;
-  text-decoration:none;color:var(--mute);font-size:.8rem;font-weight:700;line-height:1.35}
-.uni-toc a .n{flex:none;min-width:19px;font-size:.62rem;font-weight:800;opacity:.8}
-.uni-toc a:hover{background:var(--soft);color:var(--fg)}
-.uni-toc a.on{background:var(--soft);color:var(--acc)}
-.uni-scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:55}
-.uni-scrim.on{display:block}
+/* Lecture tabs — narrow screens: a scrollable strip */
+.uni-nav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  margin:9px 0 0;padding:1px}
+.uni-nav::-webkit-scrollbar{display:none}
+.uni-nav a{flex:none;display:block;padding:7px 13px;border-radius:999px;max-width:16ch;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  background:var(--card);border:1px solid var(--line);color:var(--mute);
+  text-decoration:none;font-weight:800;font-size:.8rem;line-height:1.25}
+.uni-nav a:hover{color:var(--fg)}
+.uni-nav a.on{background:var(--acc);border-color:var(--acc);color:var(--bg)}
+.uni-nav a .t{display:none}
 
-/* Back links and floating buttons */
-.uni-back{margin:28px 0 0;padding-top:16px;border-top:1px solid var(--line);font-size:.86rem;font-weight:700}
-.uni-back a{color:var(--mute);text-decoration:none}
-.uni-back a:hover{color:var(--acc)}
-.uni-fabs{position:fixed;right:14px;bottom:14px;z-index:50;display:flex;gap:8px;
-  padding-bottom:env(safe-area-inset-bottom,0px)}
-.uni-fabs a,.uni-fabs button{display:inline-flex;align-items:center;gap:6px;cursor:pointer;
-  padding:9px 14px;border-radius:999px;background:var(--card);border:1px solid var(--line);
-  color:var(--fg);text-decoration:none;font-family:inherit;font-weight:800;font-size:.8rem;line-height:1;
-  box-shadow:0 2px 10px rgba(0,0,0,.12)}
-.uni-fabs a:hover,.uni-fabs button:hover{color:var(--acc);border-color:var(--acc)}
+/* One tab's worth of sections */
+.uni-pane{display:none}
+.uni-pane.on{display:block}
 
-/* Wide screens: pin the contents to the left of the body */
+/* Nothing collapses any more: the section header is just a header. The quiz
+   cards inside "Test yourself" keep their own tap-to-reveal. */
+details.sec>summary{cursor:default;pointer-events:none}
+details.sec>summary::after{content:""!important;display:none}
+
+/* Wide screens — tabs become a fixed column to the left of the body */
 @media (min-width:1100px){
-  .uni-toc{display:block;position:fixed;left:calc(50% - 530px);top:0;right:auto;bottom:auto;
-    width:235px;height:100vh;background:transparent;border:0;box-shadow:none;padding:28px 8px 40px}
-  .uni-scrim,.uni-toc .x,.uni-toc-btn{display:none!important}
+  .uni-nav{position:fixed;left:calc(50% - 530px);top:26px;width:235px;
+    max-height:calc(100vh - 52px);overflow-y:auto;display:block;margin:0;padding:0 2px}
+  .uni-nav a{display:block;width:100%;max-width:none;white-space:normal;overflow:visible;
+    margin:0 0 5px;padding:9px 12px;border-radius:9px}
+  .uni-nav a .n{font-size:.72rem}
+  .uni-nav a .t{display:block;margin-top:3px;font-size:.71rem;font-weight:700;line-height:1.35;opacity:.75}
+  .uni-nav a.on .t{opacity:.95}
 }
-@media print{.uni-fabs,.uni-search,.uni-toc,.uni-scrim{display:none!important}}
+@media print{.uni-top,.uni-nav{display:none!important}.uni-pane{display:block!important}}
 </style>
 <!-- /uni:head -->
 """
@@ -107,41 +104,30 @@ TOP = """<!-- uni:top -->
 <nav class="uni-bc">
 <a href="../../">Home</a><span class="s">/</span><a href="../">Engineering in Biology</a><span class="s">/</span><a href="./">Cell Adhesion</a>
 </nav>
-<div class="uni-search">
-  <label class="box">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-    <input type="search" placeholder="Search this note, collapsed sections included" autocomplete="off" spellcheck="false" enterkeyhint="search">
-    <span class="uni-count"></span>
-  </label>
-  <span class="btns">
-    <button type="button" data-act="prev" title="Previous (Shift+Enter)" aria-label="Previous match">&#8593;</button>
-    <button type="button" data-act="next" title="Next (Enter)" aria-label="Next match">&#8595;</button>
-  </span>
+<div class="uni-top">
+  <div class="uni-search">
+    <label class="box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" placeholder="Search this note, every tab included" autocomplete="off" spellcheck="false" enterkeyhint="search">
+      <span class="uni-count"></span>
+    </label>
+    <span class="btns">
+      <button type="button" data-act="prev" title="Previous (Shift+Enter)" aria-label="Previous match">&#8593;</button>
+      <button type="button" data-act="next" title="Next (Enter)" aria-label="Next match">&#8595;</button>
+    </span>
+  </div>
+  <nav class="uni-nav" aria-label="Lectures"></nav>
 </div>
 <!-- /uni:top -->
 """
 
-BOTTOM = """<!-- uni:bottom -->
-<p class="uni-back"><a href="./">← Back to Cell Adhesion</a></p>
-<!-- /uni:bottom -->
-"""
-
-FAB = """<!-- uni:fab -->
-<div class="uni-scrim"></div>
-<aside class="uni-toc" aria-label="Contents">
-  <div class="hd"><b>Contents</b><button type="button" class="x" aria-label="Close contents">&#10005;</button></div>
-  <div class="uni-toc-list"></div>
-</aside>
-<div class="uni-fabs">
-  <button type="button" class="uni-toc-btn" aria-label="Open contents">&#9776; Contents</button>
-  <a href="./" aria-label="Back to Cell Adhesion">← Notes</a>
-</div>
+FOOT = """<!-- uni:foot -->
 <script>
 (function () {
-  var MIN = 2, DEBOUNCE = 120, OFFSET = 72;   // OFFSET: leave room for the sticky search bar
-  var root, bar, input, counter, prevBtn, nextBtn;
-  var toc, tocList, scrim, tocBtn, links = [], secs = [];
-  var hits = [], cur = -1, wasOpen = null, timer = null, ticking = null;
+  var MIN = 2, DEBOUNCE = 120;
+  var root, head, bar, input, counter, prevBtn, nextBtn, nav;
+  var groups = [], links = [], active = -1;
+  var hits = [], cur = -1, wasOpen = null, timer = null;
 
   function ready(fn) {
     if (document.readyState !== 'loading') fn();
@@ -160,67 +146,105 @@ FAB = """<!-- uni:fab -->
     }, 350);
   }
 
-  /* ---------- Contents ---------- */
+  function headroom() { return (head ? head.offsetHeight : 0) + 12; }
 
-  function buildToc() {
-    secs = [].slice.call(root.querySelectorAll('details.sec'));
+  /* ---------- Tabs ---------- */
+
+  function titleOf(sec) {
+    var sum = sec.querySelector('summary');
+    if (!sum) return '';
+    var badge = sum.querySelector('.n');
+    var t = sum.textContent.trim();
+    if (badge) {
+      var b = badge.textContent.trim();
+      if (b && t.indexOf(b) === 0) t = t.slice(b.length).trim();
+    }
+    return t;
+  }
+
+  /* Consecutive sections sharing an L-badge become one tab. */
+  function buildTabs() {
+    var secs = [].slice.call(root.querySelectorAll('details.sec'));
+    if (!secs.length) return;
+
     for (var i = 0; i < secs.length; i++) {
-      var d = secs[i];
-      if (!d.id) d.id = 'uni-sec-' + i;
-      var sum = d.querySelector('summary');
-      if (!sum) continue;
-      var nEl = sum.querySelector('.n');
-      var n = nEl ? nEl.textContent.trim() : '';
-      var label = sum.textContent.trim();
-      if (n && label.indexOf(n) === 0) label = label.slice(n.length).trim();
+      var sum = secs[i].querySelector('summary');
+      var nEl = sum ? sum.querySelector('.n') : null;
+      var badge = nEl ? nEl.textContent.trim() : '';
+      var g = groups[groups.length - 1];
+      if (!g || g.badge !== badge) {
+        g = { badge: badge, items: [], titles: [] };
+        groups.push(g);
+      }
+      g.items.push(secs[i]);
+      g.titles.push(titleOf(secs[i]));
+    }
+
+    for (var k = 0; k < groups.length; k++) {
+      var gr = groups[k];
+      var pane = document.createElement('div');
+      pane.className = 'uni-pane';
+      gr.items[0].parentNode.insertBefore(pane, gr.items[0]);
+      for (var j = 0; j < gr.items.length; j++) {
+        pane.appendChild(gr.items[j]);
+        gr.items[j].open = true;          // never collapsed inside a tab
+      }
+      gr.pane = pane;
+      gr.key = /^L\\d+$/.test(gr.badge) ? gr.badge : 'tab' + k;
 
       var a = document.createElement('a');
-      a.href = '#' + d.id;
-      a.setAttribute('data-target', d.id);
+      a.href = '#' + gr.key;
+      a.setAttribute('data-i', k);
+      /* A lecture badge is label enough; anything else borrows its first title. */
+      var chip = /^L\\d+$/.test(gr.badge)
+        ? gr.badge
+        : (gr.badge + ' ' + gr.titles[0].replace(/\\s*\\(.*\\)\\s*$/, '')).trim();
       var ns = document.createElement('span');
       ns.className = 'n';
-      ns.textContent = n;
-      var ls = document.createElement('span');
-      ls.textContent = label;
+      ns.textContent = chip;
+      var ts = document.createElement('span');
+      ts.className = 't';
+      ts.textContent = gr.titles.join(' · ');
       a.appendChild(ns);
-      a.appendChild(ls);
-      tocList.appendChild(a);
+      a.appendChild(ts);
+      a.title = gr.titles.join(' · ');
+      nav.appendChild(a);
       links.push(a);
     }
   }
 
-  function jump(id) {
-    var d = document.getElementById(id);
-    if (!d) return;
-    d.open = true;
-    closePanel();
-    scrollToY(d.getBoundingClientRect().top + window.pageYOffset - OFFSET);
-  }
-
-  function setActive(a) {
-    for (var j = 0; j < links.length; j++) links[j].classList.toggle('on', links[j] === a);
-  }
-
-  /* Mark whichever section is currently in view */
-  function spy() {
-    ticking = null;
-    if (!secs.length) return;
-    var y = window.pageYOffset + OFFSET + 12, idx = 0;
-    for (var i = 0; i < secs.length; i++) {
-      if (secs[i].getBoundingClientRect().top + window.pageYOffset <= y) idx = i;
-      else break;
+  function activate(i, keepScroll) {
+    if (i < 0 || i >= groups.length || i === active) {
+      if (i === active && !keepScroll) scrollToY(0);
+      return;
     }
-    setActive(links[idx]);
+    active = i;
+    for (var k = 0; k < groups.length; k++) {
+      groups[k].pane.classList.toggle('on', k === i);
+      links[k].classList.toggle('on', k === i);
+      if (k === i) links[k].setAttribute('aria-current', 'true');
+      else links[k].removeAttribute('aria-current');
+    }
+    try { links[i].scrollIntoView({ block: 'nearest', inline: 'center' }); } catch (e) {}
+    if (history.replaceState) history.replaceState(null, '', '#' + groups[i].key);
+    if (!keepScroll) scrollToY(0);
   }
 
-  /* Throttle with a timer: requestAnimationFrame never fires in a hidden tab. */
-  function onScroll() {
-    if (ticking) return;
-    ticking = setTimeout(spy, 80);
+  function indexOfKey(key) {
+    for (var i = 0; i < groups.length; i++) if (groups[i].key === key) return i;
+    return -1;
   }
 
-  function openPanel() { toc.classList.add('open'); scrim.classList.add('on'); }
-  function closePanel() { toc.classList.remove('open'); scrim.classList.remove('on'); }
+  function paneIndexOf(node) {
+    while (node && node !== root) {
+      if (node.classList && node.classList.contains('uni-pane')) {
+        for (var i = 0; i < groups.length; i++) if (groups[i].pane === node) return i;
+        return -1;
+      }
+      node = node.parentNode;
+    }
+    return -1;
+  }
 
   /* ---------- Search ---------- */
 
@@ -255,7 +279,7 @@ FAB = """<!-- uni:fab -->
     while (el && el !== root) {
       var n = el.nodeName;
       if (n === 'SCRIPT' || n === 'STYLE' || n === 'svg') return true;
-      if (el.classList && (el.classList.contains('uni-search') || el.classList.contains('uni-toc'))) return true;
+      if (el.classList && el.classList.contains('uni-top')) return true;
       el = el.parentNode;
     }
     return false;
@@ -282,8 +306,10 @@ FAB = """<!-- uni:fab -->
     cur = (cur + dir + hits.length) % hits.length;
     var h = hits[cur];
     h.classList.add('on');
-    scrollToY(h.getBoundingClientRect().top + window.pageYOffset - window.innerHeight / 2);
+    var pi = paneIndexOf(h);
+    if (pi >= 0 && pi !== active) activate(pi, true);   // hit lives in another tab
     counter.textContent = (cur + 1) + ' / ' + hits.length;
+    scrollToY(h.getBoundingClientRect().top + window.pageYOffset - window.innerHeight / 2);
   }
 
   function run() {
@@ -301,7 +327,7 @@ FAB = """<!-- uni:fab -->
 
     snapshotOpen();
     var d = allDetails();
-    for (var i = 0; i < d.length; i++) d[i].open = true;   // collapsed content is searchable too
+    for (var i = 0; i < d.length; i++) d[i].open = true;   // reveal quiz answers too
 
     var needle = q.toLowerCase();
     var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
@@ -313,7 +339,7 @@ FAB = """<!-- uni:fab -->
       }
     });
     var targets = [], n;
-    while ((n = walker.nextNode())) targets.push(n);   // collect every node first, then mutate the DOM
+    while ((n = walker.nextNode())) targets.push(n);   // collect every node first, then mutate
     for (var j = 0; j < targets.length; j++) highlight(targets[j], needle, q.length);
 
     hits = [].slice.call(root.querySelectorAll('mark.uni-hit'));
@@ -332,33 +358,28 @@ FAB = """<!-- uni:fab -->
 
   ready(function () {
     root = document.querySelector('.wrap');
+    head = document.querySelector('.uni-top');
     bar = document.querySelector('.uni-search');
-    toc = document.querySelector('.uni-toc');
-    if (!root || !bar || !toc) return;
+    nav = document.querySelector('.uni-nav');
+    if (!root || !head || !bar || !nav) return;
 
     input = bar.querySelector('input');
     counter = bar.querySelector('.uni-count');
     prevBtn = bar.querySelector('[data-act="prev"]');
     nextBtn = bar.querySelector('[data-act="next"]');
-    tocList = toc.querySelector('.uni-toc-list');
-    scrim = document.querySelector('.uni-scrim');
-    tocBtn = document.querySelector('.uni-toc-btn');
 
-    buildToc();
-    spy();
+    buildTabs();
+    if (!groups.length) return;
 
-    tocList.addEventListener('click', function (e) {
-      var a = e.target.closest ? e.target.closest('a[data-target]') : null;
+    var start = indexOfKey((location.hash || '').replace(/^#/, ''));
+    activate(start >= 0 ? start : 0, true);
+
+    nav.addEventListener('click', function (e) {
+      var a = e.target.closest ? e.target.closest('a[data-i]') : null;
       if (!a) return;
       e.preventDefault();
-      setActive(a);
-      jump(a.getAttribute('data-target'));
+      activate(parseInt(a.getAttribute('data-i'), 10), false);
     });
-    tocBtn.addEventListener('click', openPanel);
-    toc.querySelector('.x').addEventListener('click', closePanel);
-    scrim.addEventListener('click', closePanel);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
 
     input.addEventListener('input', function () {
       clearTimeout(timer);
@@ -372,23 +393,30 @@ FAB = """<!-- uni:fab -->
     nextBtn.addEventListener('click', function () { go(1); });
 
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') { closePanel(); return; }
-      if (e.key !== '/' || e.metaKey || e.ctrlKey || e.altKey) return;
       var a = document.activeElement;
-      if (a && (a === input || a.tagName === 'INPUT' || a.tagName === 'TEXTAREA' || a.isContentEditable)) return;
-      e.preventDefault();
-      input.focus();
-      input.select();
+      var typing = a && (a === input || a.tagName === 'INPUT' || a.tagName === 'TEXTAREA' || a.isContentEditable);
+      if (e.key === '/' && !typing && !e.metaKey && !e.ctrlKey && !e.altKey) {
+        e.preventDefault(); input.focus(); input.select(); return;
+      }
+      /* Arrow keys step between lectures when you are not typing. */
+      if (typing || e.metaKey || e.ctrlKey || e.altKey) return;
+      if (e.key === 'ArrowRight') { e.preventDefault(); activate(Math.min(active + 1, groups.length - 1), false); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); activate(Math.max(active - 1, 0), false); }
+    });
+
+    window.addEventListener('hashchange', function () {
+      var i = indexOfKey((location.hash || '').replace(/^#/, ''));
+      if (i >= 0) activate(i, false);
     });
   });
 })();
 </script>
-<!-- /uni:fab -->
+<!-- /uni:foot -->
 """
 
 
 def strip_previous(s):
-    for pat in STRIP + STRIP_LEGACY:
+    for pat in STRIP:
         s = re.sub(pat, "", s, flags=re.S)
     return s
 
@@ -400,18 +428,18 @@ def main(path):
 
     anchor = '<div class="wrap">'
     if anchor not in s:
-        print("오류: '%s' 를 찾을 수 없음 — 노트 구조가 바뀌었다" % anchor, file=sys.stderr)
+        print("error: %s not found - the note structure changed" % anchor, file=sys.stderr)
         return 1
     s = s.replace(anchor, HEAD + anchor + "\n" + TOP, 1)
 
     i = s.rstrip().rfind("</div>")
     if i == -1:
-        print("오류: 닫는 </div> 를 찾을 수 없음", file=sys.stderr)
+        print("error: closing </div> not found", file=sys.stderr)
         return 1
-    s = s[:i] + BOTTOM + s[i:].rstrip() + "\n" + FAB
+    s = s[:i] + s[i:].rstrip() + "\n" + FOOT
 
     p.write_text(s, encoding="utf-8")
-    print("적용 완료: %s" % path)
+    print("applied: %s" % path)
     return 0
 
 

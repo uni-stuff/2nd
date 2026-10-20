@@ -64,17 +64,17 @@ HEAD = """<!-- uni:head -->
 mark.uni-hit{background:var(--hl);color:inherit;border-radius:2px;padding:0 1px}
 mark.uni-hit.on{background:var(--acc);color:var(--bg)}
 
-/* Lecture tabs — narrow screens: a scrollable strip */
-.uni-nav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
-  margin:9px 0 0;padding:1px}
+/* Lecture nav — narrow screens: the same rows laid out as a scrollable strip */
+.uni-nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  margin:9px 0 0;padding:1px 0}
 .uni-nav::-webkit-scrollbar{display:none}
-.uni-nav a{flex:none;display:block;padding:7px 13px;border-radius:999px;max-width:16ch;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-  background:var(--card);border:1px solid var(--line);color:var(--mute);
-  text-decoration:none;font-weight:800;font-size:.8rem;line-height:1.25}
-.uni-nav a:hover{color:var(--fg)}
-.uni-nav a.on{background:var(--acc);border-color:var(--acc);color:var(--bg)}
-.uni-nav a .t{display:none}
+.uni-nav .hd{display:none}
+.uni-nav a{flex:none;display:flex;gap:8px;align-items:baseline;padding:6px 9px;border-radius:7px;
+  text-decoration:none;color:var(--mute);font-size:.8rem;font-weight:700;line-height:1.35;white-space:nowrap}
+.uni-nav a .n{flex:none;font-size:.62rem;font-weight:800;opacity:.8}
+.uni-nav a .t{max-width:15ch;overflow:hidden;text-overflow:ellipsis}
+.uni-nav a:hover{background:var(--soft);color:var(--fg)}
+.uni-nav a.on{background:var(--soft);color:var(--acc)}
 
 /* One tab's worth of sections */
 .uni-pane{display:none}
@@ -85,15 +85,15 @@ mark.uni-hit.on{background:var(--acc);color:var(--bg)}
 details.sec>summary{cursor:default;pointer-events:none}
 details.sec>summary::after{content:""!important;display:none}
 
-/* Wide screens — tabs become a fixed column to the left of the body */
+/* Wide screens — the nav becomes a fixed column to the left of the body */
 @media (min-width:1100px){
-  .uni-nav{position:fixed;left:calc(50% - 530px);top:26px;width:235px;
-    max-height:calc(100vh - 52px);overflow-y:auto;display:block;margin:0;padding:0 2px}
-  .uni-nav a{display:block;width:100%;max-width:none;white-space:normal;overflow:visible;
-    margin:0 0 5px;padding:9px 12px;border-radius:9px}
-  .uni-nav a .n{font-size:.72rem}
-  .uni-nav a .t{display:block;margin-top:3px;font-size:.71rem;font-weight:700;line-height:1.35;opacity:.75}
-  .uni-nav a.on .t{opacity:.95}
+  .uni-nav{position:fixed;left:calc(50% - 530px);top:28px;width:235px;
+    max-height:calc(100vh - 56px);overflow-y:auto;display:block;margin:0;padding:0 2px}
+  .uni-nav .hd{display:block;margin:0 0 10px;padding:0 8px;font-size:.68rem;letter-spacing:.11em;
+    text-transform:uppercase;color:var(--mute);font-weight:800}
+  .uni-nav a{display:flex;width:100%;white-space:normal;padding:7px 8px;margin:0 0 1px}
+  .uni-nav a .n{min-width:19px}
+  .uni-nav a .t{max-width:none;overflow:visible;text-overflow:clip}
 }
 @media print{.uni-top,.uni-nav{display:none!important}.uni-pane{display:block!important}}
 </style>
@@ -116,7 +116,7 @@ TOP = """<!-- uni:top -->
       <button type="button" data-act="next" title="Next (Enter)" aria-label="Next match">&#8595;</button>
     </span>
   </div>
-  <nav class="uni-nav" aria-label="Lectures"></nav>
+  <nav class="uni-nav" aria-label="Lectures"><b class="hd">Contents</b></nav>
 </div>
 <!-- /uni:top -->
 """
@@ -195,17 +195,12 @@ FOOT = """<!-- uni:foot -->
       var a = document.createElement('a');
       a.href = '#' + gr.key;
       a.setAttribute('data-i', k);
-      /* A lecture badge is label enough; anything else borrows its first title. */
-      var chip = /^L\\d+$/.test(gr.badge)
-        ? gr.badge
-        : (gr.badge + ' ' + gr.titles[0].replace(/\\s*\\(.*\\)\\s*$/, '')).trim();
       var ns = document.createElement('span');
       ns.className = 'n';
-      ns.textContent = chip;
+      ns.textContent = gr.badge;
       var ts = document.createElement('span');
       ts.className = 't';
-      /* A non-lecture chip already carries its title; don't print it twice. */
-      ts.textContent = /^L\d+$/.test(gr.badge) ? gr.titles.join(' · ') : '';
+      ts.textContent = gr.titles.join(' · ');
       a.appendChild(ns);
       a.appendChild(ts);
       a.title = gr.titles.join(' · ');

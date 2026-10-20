@@ -1,4 +1,4 @@
-<title>Cell Adhesion L6-8 Quiz Notes</title>
+<title>Cell Adhesion L6-10 Quiz Notes</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800&display=swap">
 <style>
@@ -64,7 +64,7 @@ svg .w{fill:#fff}
 
 <div class="wrap">
 <h1>Cell Adhesion quiz notes</h1>
-<p class="sub">Lectures 6, 7, 8 · tap a section to open · "More detail" = what the slide actually says</p>
+<p class="sub">Lectures 6 to 10 · tap a section to open · "More detail" = what the slide actually says</p>
 
 <!-- ===================== HOT LIST ===================== -->
 <details class="sec" open>
@@ -88,6 +88,16 @@ svg .w{fill:#fff}
 <li><b>Crawling = protrusion, attachment, traction.</b> Contraction at the back must be coupled with de-adhesion at the rear. <b>Locomotion requires an initial polarization.</b></li>
 <li><b>Rho family:</b> Cdc42 → filopodia, Rac → lamellipodia (front), Rho → stress fibres and focal adhesions (back). External signals: chemotaxis (diffusible gradient) and non-diffusible cues on ECM or cells.</li>
 <li><b>Summary slide:</b> to crawl, a cell must (1) make and keep polarity (2) protrude at the leading edge with new actin (3) adhere the new part to the substratum (4) use motor forces to bring the body forward.</li>
+<li><b>Cell cycle phases:</b> interphase = G1, S, G2; then M. <b>S phase</b> = chromosome and organelle duplication (about half the cycle). <b>M phase</b> = mitosis (nuclear division) + cytokinesis (cytoplasm division), under 1 hour. G0 = resting state when conditions are bad.</li>
+<li><b>3 regulatory transitions:</b> Start (restriction point, late G1: "is the environment favourable?") → G2/M ("is all DNA replicated?") → metaphase-to-anaphase ("are all chromosomes attached to the spindle?").</li>
+<li><b>Cdk + cyclin:</b> Cdk level is constant, cyclin is made and destroyed each cycle. Cyclin binds Cdk, activates it, aims it at targets. S-Cdk starts S phase, M-Cdk starts mitosis. S-Cdk fires DNA replication <b>only once</b> per cycle.</li>
+<li><b>Mitosis order:</b> prophase (chromosomes condense, spindle starts) → prometaphase (nuclear envelope breaks, kinetochores attach) → metaphase (align at equator) → anaphase (cohesin cut, sisters pulled apart = <b>central event</b>) → telophase (nuclear envelopes reform) → cytokinesis (actin + myosin II contractile ring).</li>
+<li><b>Spindle microtubules, 3 types:</b> kinetochore (attach to chromosomes), interpolar (overlap in the middle, antiparallel), astral (reach the cortex, position the spindle). − ends at the poles (centrosomes), + ends out.</li>
+<li><b>ECM functions:</b> structural support (adhesive scaffold + mechanical support) and cell signalling. <b>4 classes of molecules:</b> GAGs / proteoglycans, collagens, elastin, non-collagen glycoproteins (laminin, fibronectin, nidogen).</li>
+<li><b>Who does what in ECM:</b> proteoglycans = hydrated gel, resist <b>compression</b>; collagen = strength, resists <b>tension</b>; elastin = resilience (recoil); glycoproteins = help cells migrate, settle, differentiate.</li>
+<li><b>Collagen:</b> triple helix rich in proline and glycine → molecule (300 nm) → fibril (10-300 nm) → fibre (µm). Type I = skin, tendon, bone (90% of body collagen). Type II = cartilage. Type IV = basement membrane (network, not fibril).</li>
+<li><b>Basal lamina:</b> 40-120 nm sheet between epithelium and connective tissue, made by cells on both sides. Main parts: <b>laminin + type IV collagen</b>, linked by nidogen and perlecan. Laminin is the primary organiser.</li>
+<li><b>Fibronectin:</b> adhesion glycoprotein, binds collagen, heparin and integrins through the <b>RGD</b> sequence. Soluble in blood, fibrillar in tissues; fibrils only form on cells with FN-binding proteins, under <b>tension</b>.</li>
 </ol>
 </div>
 </details>
@@ -640,6 +650,294 @@ svg .w{fill:#fff}
 </div>
 </details>
 
+<!-- ===================== L9 CELL CYCLE ===================== -->
+<details class="sec">
+<summary><span class="n">L9</span>Cell cycle and division</summary>
+
+<div class="card">
+<h3>Why cells divide</h3>
+<div class="star">"The only way to make a <b>new cell</b> is to <b>duplicate</b> a cell that already exists." The most fundamental job of division: <b>pass on the genetic information</b> to the next generation.</div>
+<p>To get <b>two genetically identical daughter cells</b>, the DNA in every chromosome must be copied exactly, and the organelles and big molecules duplicated too. In an adult body division mostly replaces cells that die: millions of new cells every second just to survive.</p>
+</div>
+
+<div class="card">
+<h3>The cycle: G1 → S → G2 → M</h3>
+<svg viewBox="0 0 360 230" role="img" aria-label="cell cycle">
+ <circle cx="180" cy="115" r="80" fill="none" stroke="var(--line)" stroke-width="26"/>
+ <path d="M180 35 A80 80 0 0 1 260 115" fill="none" stroke="var(--if)" stroke-width="26"/>
+ <path d="M260 115 A80 80 0 0 1 180 195" fill="none" stroke="var(--actin)" stroke-width="26"/>
+ <path d="M180 195 A80 80 0 0 1 110 155" fill="none" stroke="var(--acc)" stroke-width="26"/>
+ <path d="M110 155 A80 80 0 0 1 180 35" fill="none" stroke="var(--mt)" stroke-width="26"/>
+ <text x="240" y="60" class="w">G1</text>
+ <text x="238" y="178" class="w">S</text>
+ <text x="118" y="190" class="w">G2</text>
+ <text x="118" y="70" class="w">M</text>
+ <text x="180" y="110" text-anchor="middle" class="s">interphase =</text>
+ <text x="180" y="128" text-anchor="middle" class="s">G1 + S + G2</text>
+ <text x="300" y="60" class="s mu">grow</text>
+ <text x="290" y="178" class="s mu">copy DNA</text>
+ <text x="20" y="200" class="s mu">check</text>
+ <text x="20" y="60" class="s mu">divide</text>
+ <text x="180" y="224" text-anchor="middle" class="s mu">G0 = parked outside the cycle (resting)</text>
+</svg>
+<div class="cmp">
+<div><b>Interphase</b> = G1 + S + G2. Most of the cycle. Cells "require much more time to grow and double their mass of proteins and organelles than to duplicate chromosomes and divide".</div>
+<div><b>G1 (gap 1)</b> between M and S. Cell grows. If outside conditions are bad, the cell waits here or parks in <b>G0</b> (a specialised resting state). If signals to grow and divide are present, early-G1 or G0 cells move on.</div>
+<div><b>S phase</b> chromosome and organelle duplication. About <b>half</b> the cycle.</div>
+<div><b>G2 (gap 2)</b> between S and mitosis.</div>
+<div><b>M phase</b> chromosome segregation and division. Much shorter, <b>under 1 hour</b>. Two parts: <b>mitosis</b> (nuclear division: copied chromosomes split into two daughter nuclei) and <b>cytokinesis</b> (cytoplasmic division: the cell itself splits).</div>
+</div>
+<p>Cycle length "varies greatly depending on external conditions and extracellular signals from other cells".</p>
+<ul class="words"><li>interphase</li><li>G1 · S · G2 · M</li><li>G0</li><li>mitosis vs cytokinesis</li></ul>
+</div>
+
+<div class="card">
+<h3>The control system: 3 checkpoints</h3>
+<svg viewBox="0 0 360 250" role="img" aria-label="three transitions">
+ <g class="s">
+  <rect x="10" y="10" width="340" height="50" rx="10" fill="var(--soft)"/>
+  <text x="24" y="31" font-weight="700">1 Start (late G1)</text>
+  <text x="24" y="50" class="mu">commit to the cycle · is the environment OK?</text>
+  <rect x="10" y="72" width="340" height="50" rx="10" fill="var(--soft)"/>
+  <text x="24" y="93" font-weight="700">2 G2/M</text>
+  <text x="24" y="112" class="mu">enter mitosis · is all DNA copied?</text>
+  <rect x="10" y="134" width="340" height="50" rx="10" fill="var(--soft)"/>
+  <text x="24" y="155" font-weight="700">3 Metaphase → Anaphase</text>
+  <text x="24" y="174" class="mu">separate sisters · all chromosomes attached?</text>
+  <g stroke="var(--mute)" stroke-width="2"><line x1="180" y1="60" x2="180" y2="72"/><line x1="180" y1="122" x2="180" y2="134"/></g>
+  <text x="180" y="212" text-anchor="middle">each switch is binary (on / off), irreversible</text>
+  <text x="180" y="234" text-anchor="middle" class="mu">robust · adaptable</text>
+ </g>
+</svg>
+<p>Key proteins coordinate the events and set how long each phase lasts depending on outside inputs. The system is "a connected series of biochemical switches, each of which initiates a specific cell-cycle event".</p>
+<div class="star"><b>Three regulatory transitions:</b><br><b>1 Start transition</b> (also called the <b>restriction point</b>), late G1. The cell commits to entering the cycle and duplicating chromosomes. Question asked: is the environment favourable?<br><b>2 G2/M transition.</b> Triggers early mitotic events that line the chromosomes up on the spindle in metaphase. Questions: is all DNA replicated? is the environment favourable?<br><b>3 Metaphase-to-anaphase transition.</b> Chromosomes separate and move to the poles (anaphase), then the cell divides (cytokinesis). Question: are all chromosomes attached to the spindle?</div>
+<div class="say"><b>Three properties of the switches:</b> binary (on/off) and launch events "in a complete, irreversible fashion" · very robust and reliable, works "even if some components fail" · highly adaptable to cell type and signals.</div>
+</div>
+
+<div class="card">
+<h3>Cdk and cyclin: the engine</h3>
+<svg viewBox="0 0 360 150" role="img" aria-label="cyclin cdk">
+ <circle cx="70" cy="60" r="34" fill="var(--actin)"/>
+ <text x="70" y="65" text-anchor="middle" class="w s">Cdk</text>
+ <circle cx="130" cy="48" r="24" fill="var(--mt)"/>
+ <text x="130" y="52" text-anchor="middle" class="w s">cyclin</text>
+ <text x="175" y="42" class="s">cyclin binds Cdk</text>
+ <text x="175" y="62" class="s">→ Cdk switches on</text>
+ <text x="175" y="82" class="s">→ phosphorylates targets</text>
+ <text x="180" y="120" text-anchor="middle" class="s mu">Cdk amount stays constant</text>
+ <text x="180" y="140" text-anchor="middle" class="s mu">cyclin is made and destroyed every cycle</text>
+</svg>
+<div class="star"><b>2 key components:</b><br><b>Cyclin-dependent kinases (Cdks).</b> Their <b>levels stay constant</b>, but their <b>activity</b> goes up and down through the cycle. Active Cdk phosphorylates proteins inside the cell, and that starts or regulates the big events. Activation is controlled by many enzymes and other proteins.<br><b>Cyclins.</b> Made and broken down ("a cycle of synthesis and degradation") every cycle. A cyclin forms a complex with a Cdk, <b>activates</b> it and <b>points it at specific targets</b>. Each cyclin-Cdk pair phosphorylates a different set of proteins.</div>
+<div class="cmp">
+<div><b>S-Cdk</b> (S-phase cyclin-Cdk) → starts S phase. Fires DNA replication <b>only once per cycle</b>: it turns on proteins that unwind DNA and start copying at replication origins, and once an origin has fired, S-Cdk also blocks the proteins that would let it fire again.</div>
+<div><b>M-Cdk</b> (M-phase cyclin-Cdk) → triggers mitosis.</div>
+</div>
+<details class="more"><summary>More detail: S phase extras</summary><div class="in"><ul>
+<li>Not just DNA content matters but also <b>structure</b>: the chromatin proteins packed with the DNA are duplicated and packaged too (helps control gene expression).</li>
+<li><b>Cohesins</b> = protein complex that holds the two sister chromatids together after copying.</li>
+<li><b>Centriole replication:</b> the centrosome (centriole pair + pericentriolar matrix) duplicates when the cell enters the cycle and the pair stays together on one side of the nucleus until mitosis. G1: the two centrioles separate by a few µm. S: a daughter centriole grows at the base of each mother at 90°. G2: daughter finishes growing; the two pairs stay in one centrosomal complex. Start of M: the complex splits and the two centrosomes move apart, each nucleating its own radial array of microtubules from the mother centriole.</li>
+</ul></div></details>
+<ul class="words"><li>Cdk constant · cyclin cycles</li><li>S-Cdk · M-Cdk</li><li>only once per cycle</li><li>cohesin</li><li>centriole duplication</li></ul>
+</div>
+
+<div class="card">
+<h3>Outside signals: 3 classes</h3>
+<p>Single-celled organisms divide as fast as food allows. Cells in a multicellular body "<b>divide only when the organism needs more cells</b>", so they must receive signals (soluble secreted proteins, proteins on other cells, or ECM components).</p>
+<div class="cmp">
+<div><b>Mitogens</b> stimulate <b>division</b>: trigger a wave of G1/S-Cdk activity that lifts the internal brakes blocking the cycle.</div>
+<div><b>Growth factors</b> stimulate <b>growth</b> (increase in cell mass): more protein synthesis, less degradation.</div>
+<div><b>Survival factors</b> keep the cell alive by suppressing programmed cell death (<b>apoptosis</b>).</div>
+</div>
+</div>
+
+<div class="card">
+<h3>Mitosis, step by step</h3>
+<svg viewBox="0 0 360 270" role="img" aria-label="mitosis phases">
+ <g class="s">
+  <!-- prophase -->
+  <circle cx="60" cy="50" r="34" fill="var(--soft)" stroke="var(--fg)" stroke-width="1.5"/>
+  <circle cx="60" cy="50" r="20" fill="none" stroke="var(--mute)" stroke-dasharray="3 3"/>
+  <path d="M52 42 q4 8 0 16 M68 42 q-4 8 0 16" stroke="var(--actin)" stroke-width="3" fill="none"/>
+  <circle cx="38" cy="30" r="3" fill="var(--mt)"/><circle cx="82" cy="70" r="3" fill="var(--mt)"/>
+  <text x="60" y="100" text-anchor="middle" font-weight="700">1 Prophase</text>
+  <!-- prometaphase -->
+  <circle cx="180" cy="50" r="34" fill="var(--soft)" stroke="var(--fg)" stroke-width="1.5"/>
+  <g stroke="var(--mt)" stroke-width="1.5"><line x1="150" y1="50" x2="176" y2="42"/><line x1="150" y1="50" x2="176" y2="58"/><line x1="210" y1="50" x2="184" y2="42"/><line x1="210" y1="50" x2="184" y2="58"/></g>
+  <path d="M176 40 q4 10 0 20 M184 40 q-4 10 0 20" stroke="var(--actin)" stroke-width="3" fill="none"/>
+  <circle cx="150" cy="50" r="3" fill="var(--mt)"/><circle cx="210" cy="50" r="3" fill="var(--mt)"/>
+  <text x="180" y="100" text-anchor="middle" font-weight="700">2 Prometaphase</text>
+  <!-- metaphase -->
+  <circle cx="300" cy="50" r="34" fill="var(--soft)" stroke="var(--fg)" stroke-width="1.5"/>
+  <g stroke="var(--mt)" stroke-width="1.5"><line x1="270" y1="50" x2="296" y2="36"/><line x1="270" y1="50" x2="296" y2="64"/><line x1="330" y1="50" x2="304" y2="36"/><line x1="330" y1="50" x2="304" y2="64"/></g>
+  <path d="M297 34 l0 32 M303 34 l0 32" stroke="var(--actin)" stroke-width="3"/>
+  <circle cx="270" cy="50" r="3" fill="var(--mt)"/><circle cx="330" cy="50" r="3" fill="var(--mt)"/>
+  <text x="300" y="100" text-anchor="middle" font-weight="700">3 Metaphase</text>
+  <!-- anaphase -->
+  <ellipse cx="60" cy="170" rx="40" ry="30" fill="var(--soft)" stroke="var(--fg)" stroke-width="1.5"/>
+  <path d="M44 160 q3 10 0 20 M76 160 q-3 10 0 20" stroke="var(--actin)" stroke-width="3" fill="none"/>
+  <circle cx="26" cy="170" r="3" fill="var(--mt)"/><circle cx="94" cy="170" r="3" fill="var(--mt)"/>
+  <g stroke="var(--mt)" stroke-width="1.5"><line x1="26" y1="170" x2="42" y2="170"/><line x1="94" y1="170" x2="78" y2="170"/></g>
+  <text x="60" y="220" text-anchor="middle" font-weight="700">4 Anaphase</text>
+  <!-- telophase -->
+  <path d="M150 170 q0 -30 30 -30 q30 0 30 30 q0 30 -30 30 q-30 0 -30 -30z" fill="var(--soft)" stroke="var(--fg)" stroke-width="1.5"/>
+  <circle cx="165" cy="170" r="10" fill="none" stroke="var(--mute)"/><circle cx="195" cy="170" r="10" fill="none" stroke="var(--mute)"/>
+  <rect x="177" y="142" width="6" height="6" fill="var(--actin)"/><rect x="177" y="192" width="6" height="6" fill="var(--actin)"/>
+  <text x="180" y="220" text-anchor="middle" font-weight="700">5 Telophase</text>
+  <!-- cytokinesis -->
+  <circle cx="282" cy="170" r="20" fill="var(--soft)" stroke="var(--fg)" stroke-width="1.5"/>
+  <circle cx="320" cy="170" r="20" fill="var(--soft)" stroke="var(--fg)" stroke-width="1.5"/>
+  <circle cx="282" cy="170" r="8" fill="none" stroke="var(--mute)"/><circle cx="320" cy="170" r="8" fill="none" stroke="var(--mute)"/>
+  <text x="300" y="220" text-anchor="middle" font-weight="700">6 Cytokinesis</text>
+  <text x="180" y="244" text-anchor="middle" class="mu">green = centrosome / spindle</text>
+  <text x="180" y="260" text-anchor="middle" class="mu">red = chromosomes, or contractile ring in 5</text>
+ </g>
+</svg>
+<div class="cmp">
+<div><b>1 Prophase</b> Nucleus: replicated chromosomes <b>condense</b> (two sister chromatids packed tight, joined at the <b>kinetochore</b> / centromere). Cytoplasm: the <b>mitotic spindle assembles</b> between the two centrosomes. Nuclear envelope still intact.</div>
+<div><b>2 Prometaphase</b> Nucleus: the <b>nuclear envelope breaks down</b>. Many motor proteins and MT regulators that build the spindle are on the chromosomes. Cytoplasm: <b>centrosomes move to the spindle poles</b>; <b>chromosomes attach to spindle microtubules via kinetochores</b> and start moving actively.</div>
+<div><b>3 Metaphase</b> Sister chromatids <b>align at the spindle equator</b> (metaphase plate), equal distance from the two poles. Forces push them back and forth; this <b>tension</b> stabilises correct attachments. Chromosomes make a local environment that favours MT nucleation and stabilisation.</div>
+<div><b>4 Anaphase: the central event of mitosis.</b> Sudden <b>loss of sister-chromatid cohesion</b> (cohesins are cleaved) → the spindle pulls sisters to opposite poles = <b>chromosome segregation</b>. Kinetochore microtubules get shorter, spindle poles move apart.</div>
+<div><b>5 Telophase</b> The two chromosome sets arrive at the poles and <b>decondense</b>. <b>Contractile ring starts to contract.</b> New nuclear envelope reassembles around each set = two nuclei = end of mitosis.</div>
+<div><b>6 Cytokinesis</b> Final step. Cytoplasm divides into two daughter cells, each with one nucleus. <b>Actin + myosin II in the contractile ring generate the force</b> and pinch the cell in two (cleavage furrow). The ring is a dynamic assembly of actin, myosin II and many structural / regulatory proteins. Interphase microtubule array re-forms from the centrosome.</div>
+</div>
+<ul class="words"><li>condensation</li><li>kinetochore · centromere</li><li>nuclear envelope breakdown</li><li>metaphase plate</li><li>cohesin cleavage</li><li>contractile ring</li><li>cleavage furrow</li></ul>
+</div>
+
+<div class="card">
+<h3>The spindle: a bipolar microtubule machine</h3>
+<svg viewBox="0 0 360 180" role="img" aria-label="spindle">
+ <circle cx="40" cy="90" r="10" fill="var(--mt)"/><circle cx="320" cy="90" r="10" fill="var(--mt)"/>
+ <g stroke="var(--if)" stroke-width="2.5" fill="none"><path d="M50 86 Q120 40 172 70"/><path d="M50 94 Q120 140 172 110"/><path d="M310 86 Q240 40 188 70"/><path d="M310 94 Q240 140 188 110"/></g>
+ <g stroke="var(--actin)" stroke-width="2.5" fill="none"><path d="M50 90 Q130 70 215 90"/><path d="M310 90 Q230 110 145 90"/></g>
+ <g stroke="var(--mt)" stroke-width="2"><line x1="32" y1="82" x2="12" y2="60"/><line x1="32" y1="98" x2="12" y2="120"/><line x1="328" y1="82" x2="348" y2="60"/><line x1="328" y1="98" x2="348" y2="120"/></g>
+ <rect x="172" y="62" width="7" height="56" rx="3" fill="var(--mute)"/><rect x="181" y="62" width="7" height="56" rx="3" fill="var(--mute)"/>
+ <text x="50" y="122" text-anchor="middle" class="s">pole (−)</text><text x="310" y="122" text-anchor="middle" class="s">pole (−)</text>
+ <text x="180" y="150" text-anchor="middle" class="s"><tspan fill="var(--if)">blue = kinetochore</tspan> · <tspan fill="var(--actin)">red = interpolar</tspan> · <tspan fill="var(--mt)">green = astral</tspan></text>
+ <text x="180" y="172" text-anchor="middle" class="s mu">grey = sister chromatids held at the kinetochore</text>
+</svg>
+<p>The mitotic spindle is a <b>bipolar array of microtubules</b>: − ends gathered at the two <b>spindle poles</b>, + ends pointing out. Each pole is a <b>centrosome</b> (centriole pair in a cloud of pericentriolar matrix). It "must have two poles" to pull the two sister sets apart.</p>
+<div class="star"><b>3 types of spindle microtubules:</b><br><b>Interpolar:</b> + ends from one pole overlap with + ends from the other pole → antiparallel array in the spindle midzone.<br><b>Kinetochore:</b> attached to the sister-chromatid pairs at the kinetochores (at the centromere of each chromatid).<br><b>Astral:</b> radiate outward from the poles, touch the cell cortex, help <b>position the spindle</b> in the cell.</div>
+<div class="cmp">
+<div><b>Bi-orientation.</b> Mitosis only works if the two sisters attach to <b>opposite</b> poles. Wrong attachments are fixed by <b>trial and error</b>: wrong ones are unstable and fall off, right ones lock in. When correctly bi-oriented, the two kinetochores are pulled apart by strong poleward forces while cohesin holds the sisters together → high <b>tension</b> at the kinetochores. Chromosome movement is controlled by <b>plus-end polymerisation and depolymerisation</b> at the kinetochore.</div>
+<div><b>How the spindle gets two poles (3 mechanisms):</b> ① <b>centrosomes</b>: the cell enters mitosis with a pair, ready-made poles, each nucleating a radial MT array ② <b>mitotic chromosomes</b>: nucleate and stabilise microtubules ③ <b>motor proteins</b>: organise MTs into a bipolar array. Main motors: <b>kinesin-5, kinesin-14, kinesin-4/10, dynein</b>, walking in different directions (kinesin-4/10 push chromosome arms away from the pole, kinetochore MTs pull).</div>
+</div>
+<details class="more"><summary>More detail: how to tell which phase a cell is in</summary><div class="in"><ul>
+<li>Mostly protein staining, immunofluorescence and microscopy.</li>
+<li><b>S phase:</b> <b>BrdU</b> (gets built into newly made DNA and can be seen), or DNA content (doubled).</li>
+<li><b>M phase:</b> antibodies against microtubules reveal the mitotic spindle.</li>
+<li><b>Cytokinesis:</b> ordinary optical microscopy (you can see the furrow).</li>
+</ul></div></details>
+<ul class="words"><li>bipolar spindle</li><li>interpolar · kinetochore · astral</li><li>bi-orientation</li><li>trial and error</li><li>kinesin-5 · 14 · 4/10 · dynein</li><li>BrdU</li></ul>
+</div>
+</details>
+
+<!-- ===================== L10 ECM ===================== -->
+<details class="sec">
+<summary><span class="n">L10</span>ECM: what it is made of</summary>
+
+<div class="card">
+<h3>ECM basics</h3>
+<p>A tissue = cells + ECM. The ECM is a complex network of proteins and polysaccharides, "synthesised, secreted and assembled by cells". Every tissue has its own version: similar ingredients, different amounts and arrangement. Calcified in bone, transparent in cornea, rope-like in tendon, fluid in blood.</p>
+<div class="star"><b>Main functions (slide):</b> ① <b>structural support</b> for the tissue: an adhesive scaffold + mechanical support ② <b>cell signalling</b>.</div>
+<div class="star"><b>Four major classes of macromolecules:</b><br>① <b>GAGs</b> (glycosaminoglycans), big charged sugar chains, usually attached to a protein = <b>proteoglycans</b><br>② <b>Collagens</b> (fibrous protein family)<br>③ <b>Elastin</b> (fibrous)<br>④ <b>Non-collagen glycoproteins</b>: laminin, nidogen, fibronectin</div>
+<div class="cmp">
+<div><b>Proteoglycans</b> make the hydrated gel-like <b>"ground substance"</b>. Resist <b>compressive</b> forces. Let nutrients, metabolites and hormones diffuse fast.</div>
+<div><b>Collagen fibres</b> <b>strengthen</b> and help organise the matrix (resist tension).</div>
+<div><b>Elastin</b> gives <b>resilience</b> (snap back after stretch).</div>
+<div><b>Matrix glycoproteins</b> help cells <b>migrate, settle and differentiate</b> in the right places.</div>
+</div>
+<ul class="words"><li>ground substance</li><li>compression vs tension</li><li>resilience</li><li>adhesive scaffold</li></ul>
+</div>
+
+<div class="card">
+<h3>GAGs and proteoglycans: the water sponge</h3>
+<svg viewBox="0 0 360 150" role="img" aria-label="proteoglycan">
+ <line x1="30" y1="75" x2="330" y2="75" stroke="var(--mt)" stroke-width="5"/>
+ <g stroke="var(--actin)" stroke-width="2">
+  <line x1="60" y1="75" x2="50" y2="30"/><line x1="60" y1="75" x2="70" y2="120"/><line x1="100" y1="75" x2="92" y2="28"/><line x1="100" y1="75" x2="108" y2="122"/><line x1="140" y1="75" x2="130" y2="30"/><line x1="140" y1="75" x2="150" y2="120"/><line x1="180" y1="75" x2="172" y2="28"/><line x1="180" y1="75" x2="188" y2="122"/><line x1="220" y1="75" x2="210" y2="30"/><line x1="220" y1="75" x2="230" y2="120"/><line x1="260" y1="75" x2="252" y2="28"/><line x1="260" y1="75" x2="268" y2="122"/><line x1="300" y1="75" x2="290" y2="30"/><line x1="300" y1="75" x2="310" y2="120"/>
+ </g>
+ <text x="180" y="18" text-anchor="middle" class="s" fill="var(--actin)">GAG chains (sugar, negative charge)</text>
+ <text x="180" y="142" text-anchor="middle" class="s" fill="var(--mt)">core protein</text>
+</svg>
+<p><b>GAG</b> = long sugar chain made of a repeating pair: an <b>amino sugar</b> (N-acetylglucosamine or N-acetylgalactosamine, usually <b>sulfated</b>) + a <b>uronic acid</b> (glucuronic or iduronic). Main groups: <b>hyaluronan, chondroitin sulfate, dermatan sulfate, heparan sulfate, keratan sulfate</b>.</p>
+<div class="star"><b>Why they fill space:</b> stiff and strongly hydrophilic. They form hydrated gels and take highly extended shapes that fill most of the extracellular space. All those negative charges attract cations (mostly <b>Na⁺</b>) → osmotically active → suck in large amounts of water → <b>swelling pressure</b> → <b>resistance to compression</b>.</div>
+<div class="cmp">
+<div><b>Hyaluronan (hyaluronic acid)</b> = the odd one out. Simplest GAG. Enormous chain, identical repeating units, <b>no sulfate</b>, <b>not attached to a core protein</b>. In all tissues and fluids. Space filler in embryo development and tissue repair. Part of joint fluid (lubricant).</div>
+<div><b>Proteoglycan</b> = GAG covalently stuck to a <b>core protein</b>. Made in 3 steps: ① membrane-bound ribosomes make the protein ② sugar chains are built on it in the <b>Golgi</b> ③ delivered to the ECM by <b>exocytosis</b>. Examples: decorin (small, ~40,000), aggrecan (huge, ~3 million, many aggrecans hang off one hyaluronan via link protein), perlecan.</div>
+</div>
+<ul class="words"><li>repeating disaccharide</li><li>sulfated</li><li>hyaluronan = no sulfate, no core protein</li><li>Golgi → exocytosis</li><li>aggrecan · decorin · perlecan</li></ul>
+</div>
+
+<div class="card">
+<h3>Collagen: the strength rope</h3>
+<svg viewBox="0 0 360 170" role="img" aria-label="collagen hierarchy">
+ <g class="s">
+  <path d="M20 30 q10 -10 20 0 t20 0 t20 0 t20 0" fill="none" stroke="var(--actin)" stroke-width="2.5"/>
+  <path d="M20 30 q10 10 20 0 t20 0 t20 0 t20 0" fill="none" stroke="var(--actin)" stroke-width="2.5" opacity=".6"/>
+  <path d="M20 30 q10 -4 20 0 t20 0 t20 0 t20 0" fill="none" stroke="var(--actin)" stroke-width="2.5" opacity=".3"/>
+  <text x="120" y="34">triple helix = 1 molecule</text>
+  <text x="120" y="50" class="mu">300 nm long, 1.5 nm thick</text>
+  <g stroke="var(--actin)" stroke-width="3"><line x1="20" y1="80" x2="60" y2="80"/><line x1="64" y1="80" x2="104" y2="80"/><line x1="20" y1="88" x2="40" y2="88"/><line x1="44" y1="88" x2="84" y2="88"/><line x1="88" y1="88" x2="104" y2="88"/><line x1="20" y1="96" x2="30" y2="96"/><line x1="34" y1="96" x2="74" y2="96"/><line x1="78" y1="96" x2="104" y2="96"/></g>
+  <text x="120" y="88">fibril = molecules staggered</text>
+  <text x="120" y="104" class="mu">10 to 300 nm thick</text>
+  <rect x="20" y="126" width="84" height="26" rx="13" fill="var(--actin)"/>
+  <text x="120" y="140">fibre = bundle of fibrils</text>
+  <text x="120" y="156" class="mu">several µm thick</text>
+ </g>
+</svg>
+<p>"Major proteins of the ECM." Secreted in large amounts by connective-tissue cells (fibroblasts), in smaller amounts by many other cells. Rich in <b>proline and glycine</b>.</p>
+<div class="star"><b>Three levels:</b> <b>collagen molecule</b> = long, stiff, <b>triple-stranded helix</b> → <b>collagen fibril</b> = molecules assembled into thin polymers (10-300 nm diameter) → <b>collagen fibre</b> = fibrils bundled into cables (several µm).</div>
+<div class="cmp">
+<div><b>Type I</b> skin, tendon, vascular tissue, bone, ligaments, cornea. <b>90% of body collagen.</b> Mutation → osteogenesis imperfecta (fragile bones).</div>
+<div><b>Type II</b> cartilage (main component), intervertebral disc. Mutation → chondrodysplasia (dwarfism).</div>
+<div><b>Type III</b> embryos, internal organs, skin, blood vessel walls. Mutation → Ehlers-Danlos (fragile skin, loose joints, vessels rupture).</div>
+<div><b>Type IV</b> <b>basement membrane / basal lamina</b>. Forms a <b>sheet-like network</b>, not fibrils. Mutation → kidney disease.</div>
+<div><b>Others:</b> V with type I; VII anchoring fibrils under skin epithelia; IX and XII fibril-associated (link fibrils, type IX in cartilage); XVII transmembrane (hemidesmosomes); XVIII proteoglycan core in basal lamina.</div>
+</div>
+<div class="say"><b>How collagen is arranged depends on the tissue:</b> skin = woven wickerwork (resists pull in many directions) · tendon = parallel bundles along the pull axis · bone and cornea = orderly layers, each layer at right angles to the next (plywood). <b>Cells decide the size and arrangement of fibrils</b> by pulling on the matrix (mechanical as well as chemical interaction). Fibril-associated collagens help fibrils form structures that resist tension.</div>
+<ul class="words"><li>proline · glycine</li><li>triple helix</li><li>molecule → fibril → fibre</li><li>type I 90%</li><li>type II cartilage</li><li>type IV basal lamina</li></ul>
+</div>
+
+<div class="card">
+<h3>Elastin: the rubber band</h3>
+<p>Many tissues need to be strong AND stretchy. <b>Elastic fibres</b> give <b>resilience</b>: they recoil after a short stretch. Main part is <b>elastin</b>.</p>
+<div class="say"><b>How it's built:</b> cells secrete soluble <b>tropoelastin</b>, which assembles into elastic fibres near the plasma membrane. After secretion the tropoelastin molecules become heavily <b>cross-linked</b> into a big network of elastin fibres and sheets. Each molecule is a loose random coil; stretch straightens them, relax lets them curl up. <b>Stretching is limited by the inelastic collagen fibres</b> woven in with them.</div>
+<ul class="words"><li>tropoelastin</li><li>cross-link</li><li>recoil / resilience</li><li>collagen limits stretch</li></ul>
+</div>
+
+<div class="card">
+<h3>Laminin and the basal lamina</h3>
+<svg viewBox="0 0 360 170" role="img" aria-label="basal lamina">
+ <g class="s">
+  <rect x="20" y="20" width="320" height="50" rx="6" fill="var(--soft)" stroke="var(--line)"/>
+  <text x="180" y="50" text-anchor="middle">epithelial cells</text>
+  <rect x="20" y="76" width="320" height="14" fill="var(--acc)"/>
+  <text x="180" y="87" text-anchor="middle" class="w">basal lamina (40 to 120 nm)</text>
+  <rect x="20" y="96" width="320" height="50" rx="6" fill="var(--hl)"/>
+  <text x="180" y="126" text-anchor="middle">connective tissue</text>
+  <text x="180" y="164" text-anchor="middle" class="mu">made by cells on BOTH sides</text>
+ </g>
+</svg>
+<div class="cmp">
+<div><b>Laminin</b> three long polypeptide chains (<b>α, β, γ</b>) held by disulfide bonds, shaped like a cross. Has binding sites for other laminins (makes a <b>2D network</b>), for cell-surface receptors (integrins, dystroglycan), and for nidogen and perlecan. "Important component of the basal lamina"; its network coordinates assembly of the other basal lamina parts.</div>
+<div><b>Basal lamina</b> = a specialised ECM that <b>separates epithelial and connective tissue</b>. Thin, tough, flexible sheet, <b>40-120 nm</b> thick. Made by cells on each side. <b>Major components: laminin and type IV collagen.</b> Laminin is the primary organiser of the sheet. Laminin and type IV collagen link to the glycoprotein <b>nidogen</b> and the proteoglycan <b>perlecan</b> → highly cross-linked network.</div>
+<div><b>What the basal lamina does</b> critical for body architecture · essential mechanical role · <b>selective barrier</b> to cell movement and filter for molecules (kidney glomerulus: blood → urine) · forms the mechanical link between epithelium and connective tissue · determines cell polarity · influences metabolism · organises proteins in nearby membranes · promotes cell survival. Also wraps muscle cells.</div>
+</div>
+<ul class="words"><li>α β γ chains</li><li>laminin + type IV collagen</li><li>nidogen · perlecan</li><li>40-120 nm</li><li>selective barrier / filter</li></ul>
+</div>
+
+<div class="card">
+<h3>Fibronectin: the sticker with RGD</h3>
+<p><b>Adhesion glycoprotein</b> found in all vertebrates and most ECMs. Two long arms joined by disulfide bonds at the C end. It has <b>many domains</b>, each binding something different: collagen, heparin, integrins, other fibronectins. So it both <b>organises the matrix</b> and <b>helps cells attach</b> to it.</p>
+<div class="star"><b>RGD sequence</b> = Arg-Gly-Asp, the short loop in fibronectin that <b>integrins</b> grab. (Nearby "synergy sequence" PHSRN helps.) This is the classic cell-binding motif, and it's what biomaterials people copy to make surfaces cell-friendly.</div>
+<div class="cmp">
+<div><b>Two forms:</b> <b>soluble</b> FN in blood plasma, and <b>insoluble fibrillar</b> FN in tissues.</div>
+<div><b>Fibrillogenesis</b> (making FN fibrils) only happens <b>on the surface of cells</b> that have FN-binding proteins (integrins). Cells pull on FN, <b>stretching exposes hidden ("cryptic") binding sites</b>, which recruit more FN molecules into a fibril. So FN assembly "depends on tension and interaction with cell surfaces".</div>
+</div>
+<ul class="words"><li>RGD = Arg-Gly-Asp</li><li>collagen · heparin · integrin binding</li><li>soluble vs fibrillar</li><li>cryptic sites · tension</li></ul>
+</div>
+</details>
+
 <!-- ===================== SELF TEST ===================== -->
 <details class="sec">
 <summary><span class="n">✓</span>Test yourself (tap to reveal)</summary>
@@ -680,6 +978,32 @@ svg .w{fill:#fff}
 <details class="q"><summary>Four things a cell must do to crawl (summary slide)?</summary><div class="a">Generate and maintain polarity (external cues) · coordinate protrusion at the leading edge by new actin assembly · coordinate adhesion of the new part to the substratum · coordinate motor forces to bring the cell body forward.</div></details>
 <details class="q"><summary>Cadherin vs integrin?</summary><div class="a">Cadherin = cell-cell adhesion. Integrin = cell-ECM adhesion; binds ECM outside and actin inside via talin, vinculin, kindlin.</div></details>
 <details class="q"><summary>Two main functions of the ECM, and which cells make it?</summary><div class="a">Mechanical support for cells; regulate cell behaviour. Secreted by fibroblasts.</div></details>
+<details class="q"><summary>Name the 4 phases of the cell cycle and say which are interphase.</summary><div class="a">G1, S, G2, M. Interphase = G1 + S + G2. S = duplication (about half the cycle), M = mitosis + cytokinesis (under 1 hour).</div></details>
+<details class="q"><summary>What is G0?</summary><div class="a">A specialised resting state cells enter from G1 when extracellular conditions are unfavourable.</div></details>
+<details class="q"><summary>Name the 3 regulatory transitions and the question each asks.</summary><div class="a">Start / restriction point (late G1): is the environment favourable? G2/M: is all DNA replicated, is the environment favourable? Metaphase-to-anaphase: are all chromosomes attached to the spindle?</div></details>
+<details class="q"><summary>Cdk vs cyclin: which one changes in amount?</summary><div class="a">Cyclin. It is synthesised and degraded every cycle. Cdk levels are constant; only Cdk activity changes, because cyclin must bind to activate it and direct it to targets.</div></details>
+<details class="q"><summary>What do S-Cdk and M-Cdk do?</summary><div class="a">S-Cdk initiates S phase (DNA replication, only once per cycle, by blocking re-firing of origins). M-Cdk triggers mitosis.</div></details>
+<details class="q"><summary>Mitogen vs growth factor vs survival factor?</summary><div class="a">Mitogen: stimulates division (G1/S-Cdk wave). Growth factor: stimulates growth in mass (more protein synthesis, less degradation). Survival factor: suppresses apoptosis.</div></details>
+<details class="q"><summary>In which phase does the nuclear envelope break down?</summary><div class="a">Prometaphase. Centrosomes move to the poles and chromosomes attach to spindle MTs via kinetochores.</div></details>
+<details class="q"><summary>What is the central event of mitosis?</summary><div class="a">Anaphase: sudden loss of sister-chromatid cohesion (cohesins cleaved), sisters pulled to opposite poles = chromosome segregation. Kinetochore MTs shorten, poles move apart.</div></details>
+<details class="q"><summary>What holds sister chromatids together, and when is it removed?</summary><div class="a">Cohesin. Cleaved at the metaphase-to-anaphase transition.</div></details>
+<details class="q"><summary>What generates the force for cytokinesis?</summary><div class="a">Actin and myosin II in the contractile ring, which pinches the cell in two (cleavage furrow).</div></details>
+<details class="q"><summary>Three types of spindle microtubules?</summary><div class="a">Kinetochore (attach to chromosomes), interpolar (overlap antiparallel in the midzone), astral (reach the cortex, position the spindle). Minus ends at the poles.</div></details>
+<details class="q"><summary>How are wrong kinetochore attachments fixed?</summary><div class="a">Trial and error: incorrect attachments are unstable and don't last; correct bi-oriented ones are under tension and get locked in.</div></details>
+<details class="q"><summary>Three mechanisms that make the spindle bipolar?</summary><div class="a">Centrosomes (prefabricated poles), mitotic chromosomes (nucleate and stabilise MTs), motor proteins (kinesin-5, kinesin-14, kinesin-4/10, dynein organise MTs into a bipolar array).</div></details>
+<details class="q"><summary>How do you detect S phase in the lab?</summary><div class="a">BrdU incorporated into newly made DNA, or doubled DNA content. (M phase: antibodies against microtubules show the spindle. Cytokinesis: optical microscopy.)</div></details>
+<details class="q"><summary>Four major classes of ECM macromolecules?</summary><div class="a">GAGs / proteoglycans, collagens, elastin, non-collagen glycoproteins (laminin, nidogen, fibronectin).</div></details>
+<details class="q"><summary>Which ECM component resists compression and how?</summary><div class="a">Proteoglycans / GAGs. Negative charges attract Na⁺, osmotically pull in water, swelling pressure resists compression. They form the hydrated gel-like ground substance.</div></details>
+<details class="q"><summary>What is special about hyaluronan?</summary><div class="a">Simplest GAG: enormous chain, identical disaccharide units, no sulfate, not covalently linked to a core protein. Space filler in development and repair, joint lubricant.</div></details>
+<details class="q"><summary>Where are proteoglycans assembled and how do they leave the cell?</summary><div class="a">Core protein made by membrane-bound ribosomes; GAG chains added in the Golgi; delivered to the ECM by exocytosis.</div></details>
+<details class="q"><summary>Collagen molecule → fibril → fibre: sizes?</summary><div class="a">Molecule: triple helix, 300 nm × 1.5 nm. Fibril: 10-300 nm diameter. Fibre: several µm. Rich in proline and glycine.</div></details>
+<details class="q"><summary>Which collagen type is in cartilage? In basal lamina? Which is 90% of body collagen?</summary><div class="a">Type II cartilage. Type IV basal lamina (sheet-like network). Type I is 90% (bone, skin, tendon, ligament).</div></details>
+<details class="q"><summary>How is collagen arranged in skin, tendon and bone?</summary><div class="a">Skin: woven wickerwork, resists tension in many directions. Tendon: parallel bundles along the tension axis. Bone and cornea: layers of parallel fibrils at right angles to the next layer.</div></details>
+<details class="q"><summary>What limits how far elastin can stretch?</summary><div class="a">Inelastic collagen fibres woven in with the elastic fibres. Elastin itself is made from secreted tropoelastin that gets cross-linked into a network.</div></details>
+<details class="q"><summary>Two major components of the basal lamina, and which organises it?</summary><div class="a">Laminin and type IV collagen, cross-linked via nidogen and perlecan. Laminin is the primary organiser. 40-120 nm thick, made by cells on both sides.</div></details>
+<details class="q"><summary>What is laminin made of?</summary><div class="a">Three polypeptide chains (α, β, γ) held by disulfide bonds; binding sites for other laminins (2D network), cell receptors (integrins), nidogen, perlecan.</div></details>
+<details class="q"><summary>What is RGD and why does it matter?</summary><div class="a">Arg-Gly-Asp, the sequence in fibronectin that integrins bind. The key cell-attachment motif.</div></details>
+<details class="q"><summary>Where does fibronectin form fibrils, and what drives it?</summary><div class="a">Only on the surface of cells with FN-binding proteins (integrins). Cell tension stretches FN, exposes cryptic binding sites, recruits more FN → fibrillogenesis depends on tension and cell-surface interaction.</div></details>
 </div>
 </details>
 

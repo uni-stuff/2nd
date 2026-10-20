@@ -1,0 +1,46 @@
+/* 공용 스타일 — 콤팩트 에디토리얼 인덱스 */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+:root{
+  --bg:#f4f4f2; --card:#fff; --fg:#1b1a19; --mute:#75716c; --line:#e3e1dd;
+  --acc:#8A3440; --acc-soft:#f6edee;
+  --f:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{--bg:#121211;--card:#1b1b1a;--fg:#ececea;--mute:#918c86;--line:#2c2c2a;--acc:#d9808d;--acc-soft:#2a1d20;color-scheme:dark}}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--f);font-size:14.5px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  padding:36px max(18px,env(safe-area-inset-left,0px)) 72px}
+.wrap{max-width:620px;margin:0 auto}
+
+/* 브레드크럼 */
+nav.bc{font-size:12px;color:var(--mute);margin-bottom:22px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+nav.bc a{color:var(--mute);text-decoration:none;border-bottom:1px solid transparent}
+nav.bc a:hover{color:var(--acc);border-bottom-color:var(--acc)}
+nav.bc .sep{opacity:.45}
+nav.bc .here{color:var(--fg);font-weight:600}
+
+/* 헤더 */
+header{border-bottom:2px solid var(--fg);padding-bottom:14px;margin-bottom:4px}
+.kicker{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);font-weight:700;margin-bottom:7px}
+h1{font-size:25px;font-weight:700;letter-spacing:-.02em;line-height:1.2}
+.lede{color:var(--mute);font-size:13px;margin-top:7px}
+
+/* 목록 */
+.list{background:var(--card);border:1px solid var(--line);border-radius:3px;margin-top:22px;overflow:hidden}
+.row{display:flex;align-items:center;gap:13px;padding:14px 16px;text-decoration:none;color:inherit;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.row:hover{background:var(--acc-soft)}
+.row:hover .nm{color:var(--acc)}
+.ico{flex:none;width:19px;height:19px;color:var(--mute)}
+.row:hover .ico{color:var(--acc)}
+.txt{min-width:0;flex:1}
+.nm{font-weight:600;font-size:14.5px;letter-spacing:-.01em}
+.meta{font-size:11.5px;color:var(--mute);margin-top:2px}
+.arw{flex:none;color:var(--line);font-size:14px}
+.row:hover .arw{color:var(--acc)}
+
+/* 섹션 라벨 */
+.lbl{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);font-weight:700;margin:26px 0 -10px}
+
+footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-size:11.5px;color:var(--mute)}
+footer a{color:var(--mute)}

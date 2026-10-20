@@ -204,7 +204,8 @@ FOOT = """<!-- uni:foot -->
       ns.textContent = chip;
       var ts = document.createElement('span');
       ts.className = 't';
-      ts.textContent = gr.titles.join(' · ');
+      /* A non-lecture chip already carries its title; don't print it twice. */
+      ts.textContent = /^L\d+$/.test(gr.badge) ? gr.titles.join(' · ') : '';
       a.appendChild(ns);
       a.appendChild(ts);
       a.title = gr.titles.join(' · ');
@@ -370,6 +371,10 @@ FOOT = """<!-- uni:foot -->
 
     buildTabs();
     if (!groups.length) return;
+
+    /* Nothing collapses now, so the original hint no longer describes the page. */
+    var sub = root.querySelector('.sub');
+    if (sub) sub.textContent = sub.textContent.replace('tap a section to open', 'pick a lecture tab');
 
     var start = indexOfKey((location.hash || '').replace(/^#/, ''));
     activate(start >= 0 ? start : 0, true);

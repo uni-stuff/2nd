@@ -148,6 +148,18 @@ FAB = """<!-- uni:fab -->
     else document.addEventListener('DOMContentLoaded', fn);
   }
 
+  /* 부드러운 스크롤이 무시되는 환경이 있다. 움직이지 않으면 즉시 이동으로 떨어뜨린다. */
+  function scrollToY(y) {
+    if (y < 0) y = 0;
+    var start = window.pageYOffset;
+    if (Math.abs(y - start) < 2) return;
+    try { window.scrollTo({ top: y, behavior: 'smooth' }); }
+    catch (e) { window.scrollTo(0, y); return; }
+    setTimeout(function () {
+      if (Math.abs(window.pageYOffset - start) < 2) window.scrollTo(0, y);
+    }, 350);
+  }
+
   /* ---------- 목차 ---------- */
 
   function buildToc() {
@@ -182,8 +194,7 @@ FAB = """<!-- uni:fab -->
     if (!d) return;
     d.open = true;
     closePanel();
-    var y = d.getBoundingClientRect().top + window.pageYOffset - OFFSET;
-    window.scrollTo({ top: y < 0 ? 0 : y, behavior: 'smooth' });
+    scrollToY(d.getBoundingClientRect().top + window.pageYOffset - OFFSET);
   }
 
   /* 지금 보고 있는 섹션을 목차에 표시 */
@@ -267,7 +278,7 @@ FAB = """<!-- uni:fab -->
     cur = (cur + dir + hits.length) % hits.length;
     var h = hits[cur];
     h.classList.add('on');
-    h.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    scrollToY(h.getBoundingClientRect().top + window.pageYOffset - window.innerHeight / 2);
     counter.textContent = (cur + 1) + ' / ' + hits.length;
   }
 

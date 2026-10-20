@@ -141,7 +141,7 @@ FAB = """<!-- uni:fab -->
   var MIN = 2, DEBOUNCE = 120, OFFSET = 72;   // OFFSET: 고정 검색바 높이만큼 띄워서 스크롤
   var root, bar, input, counter, prevBtn, nextBtn;
   var toc, tocList, scrim, tocBtn, links = [], secs = [];
-  var hits = [], cur = -1, wasOpen = null, timer = null, ticking = false;
+  var hits = [], cur = -1, wasOpen = null, timer = null, ticking = null;
 
   function ready(fn) {
     if (document.readyState !== 'loading') fn();
@@ -197,22 +197,26 @@ FAB = """<!-- uni:fab -->
     scrollToY(d.getBoundingClientRect().top + window.pageYOffset - OFFSET);
   }
 
+  function setActive(a) {
+    for (var j = 0; j < links.length; j++) links[j].classList.toggle('on', links[j] === a);
+  }
+
   /* 지금 보고 있는 섹션을 목차에 표시 */
   function spy() {
-    ticking = false;
+    ticking = null;
     if (!secs.length) return;
     var y = window.pageYOffset + OFFSET + 12, idx = 0;
     for (var i = 0; i < secs.length; i++) {
       if (secs[i].getBoundingClientRect().top + window.pageYOffset <= y) idx = i;
       else break;
     }
-    for (var j = 0; j < links.length; j++) links[j].classList.toggle('on', j === idx);
+    setActive(links[idx]);
   }
 
+  /* 타이머로 솎아낸다. requestAnimationFrame 은 탭이 숨겨지면 아예 돌지 않는다. */
   function onScroll() {
     if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(spy);
+    ticking = setTimeout(spy, 80);
   }
 
   function openPanel() { toc.classList.add('open'); scrim.classList.add('on'); }
@@ -347,6 +351,7 @@ FAB = """<!-- uni:fab -->
       var a = e.target.closest ? e.target.closest('a[data-target]') : null;
       if (!a) return;
       e.preventDefault();
+      setActive(a);
       jump(a.getAttribute('data-target'));
     });
     tocBtn.addEventListener('click', openPanel);
